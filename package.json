@@ -1,6 +1,6 @@
 {
   "name": "@zhike/ti-component",
-  "version": "1.2.25",
+  "version": "1.2.26",
   "description": "common components for Zhike-tiku",
   "main": "lib/index.js",
   "files": [
@@ -10,7 +10,7 @@
     "build": "webpack --config webpack.config.js",
     "deploy-storybook": "storybook-to-ghpages",
     "build-storybook": "build-storybook -c stories",
-    "storybook": "start-storybook -p 3002 -c stories"
+    "storybook": "start-storybook -p 3006 -c stories"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
@@ -74,7 +74,7 @@
   "keywords": [
     "zhike"
   ],
-  "author": "zhike",
+  "author": "xiaoyinspy",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zhike-team/ti-component/issues"

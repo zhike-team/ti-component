@@ -62,27 +62,27 @@ export default class Header extends Component {
 
   // 上一步
   static back() {
-    this.instance.back();
+    this.instance && this.instance.back();
   }
 
   // 下一步
   static next() {
-    this.instance.next();
+    this.instance && this.instance.next();
   }
 
   // 我要纠错
   static handleCorrect() {
-    this.instance.handleCorrect();
+    this.instance && this.instance.handleCorrect();
   }
 
   // 上传失败
   static uploadFailed() {
-    this.instance.handleTimeExpried();
+    this.instance && this.instance.handleTimeExpried();
   }
 
   // 设置倒计时
   static setTimer(options) {
-    this.instance.setTimer(options);
+    this.instance && this.instance.setTimer(options);
   }
 
   // 清空倒计时
@@ -94,14 +94,14 @@ export default class Header extends Component {
 
   // 开启计时
   static startTimer() {
-    this.instance.setState({
+    this.instance && this.instance.setState({
       isPauseTimer: false,
     });
   }
 
   // 暂停计时
   static pauseTimer() {
-    this.instance.setState({
+    this.instance && this.instance.setState({
       isPauseTimer: true,
     });
   }

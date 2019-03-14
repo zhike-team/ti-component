@@ -83,6 +83,12 @@ module.exports = {
       commonjs2: 'history',
       amd: 'history',
     },
+    "routers": {
+      root: 'routers',
+      commonjs: 'routers',
+      commonjs2: 'routers',
+      amd: 'routers',
+    }
   },
   plugins: [
     new webpack.DefinePlugin({

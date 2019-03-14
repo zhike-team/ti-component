@@ -1,6 +1,6 @@
 {
   "name": "@zhike/ti-component",
-  "version": "1.2.21",
+  "version": "1.2.23",
   "description": "common components for Zhike-tiku",
   "main": "lib/index.js",
   "files": [
@@ -24,10 +24,11 @@
     "history": ">=4.7.2"
   },
   "dependencies": {
-    "react-router": "^4.3.1",
-    "react-custom-scrollbars": "^4.2.1",
-    "recordrtc": "^5.4.5",
     "howler": "^2.0.8",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-router": "^4.3.1",
+    "recordrtc": "^5.4.5",
+    "routers": "^0.1.4",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

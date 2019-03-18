@@ -294,10 +294,10 @@ export default class Header extends Component {
       this.alertTimeExpried = false;
     }
     // 如果是阶段测评 开始计时
-    if (step.mode === 'Package' && timer.subject !== 'Package') {
+    if (step.mode === 'Package' && step.subject !== timer.subject) {
       this.setTimer({
-        subject: 'Package',
-        time: timer.time || 30 * 60 * 1000,
+        subject: step.subject,
+        time: step.duration * 1000,
         isCountDown: true,
         isEnd: false,
       });
@@ -381,21 +381,41 @@ export default class Header extends Component {
 
   // 处理倒计时结束
   handleTimeExpried() {
-    const { stepList, step } = this.props;
+    const { stepList, step, params } = this.props;
     const { mode, exerciseId, practiceId } = this.props.params;
     const search = global.location.search; // eslint-disable-line
-    if (isFull === 'true') {
+    if (params.mode !== 'package' && isFull === 'true') {
       // 当前科目时间耗尽，将跳转至下一科目
       history.push(`/${mode}/${practiceId}/${exerciseId}/${step.index + 1 + step.questionCount - step.questionIndex}${search}`);
-      return;
+    } else if (params.mode === 'package') {
+      if (step.subject === get(stepList, `${stepList.length - 2}.subject`)) {
+        history.push(`/${mode}/${practiceId}/${exerciseId}/${step.index + 1}${search}`);
+        return false;
+      } else {
+        let isCurret = false;
+        let isOk = false;
+        let nextId;
+        stepList.map(item => {
+          if (item.subject === step.subject) {
+            isCurret = true;
+          } else if (isCurret && !isOk && item.subject !== step.subject) {
+            isOk = true;
+            nextId = item.index;
+          }
+          return false;
+        });
+        history.push(`/${mode}/${practiceId}/${exerciseId}/${nextId}${search}`);
+        return false;
+      }
+    } else {
+      const stepId = stepList[stepList.length - 1] && stepList[stepList.length - 1].index;
+      history.push(`/${mode}/${practiceId}/${exerciseId}/${stepId}${search}`);
     }
-    const stepId = stepList[stepList.length - 1] && stepList[stepList.length - 1].index;
-    history.push(`/${mode}/${practiceId}/${exerciseId}/${stepId}${search}`);
   }
 
   // 倒计时
   countDown() {
-    const { timer, step, params } = this.props;
+    const { timer, step, params, stepList } = this.props;
     const { isPauseTimer, isPauseTimerForModal } = this.state;
     // 如果是非做题页或者休息页 不保存时间
     if (!step.isOtherPage && step.questionType !== 'Resting' && params.mode !== 'package') {
@@ -403,7 +423,8 @@ export default class Header extends Component {
     }
     if (timer.isEnd && timer.isCountDown && !this.alertTimeExpried &&
       (timer.subject === 'Test' ||
-      (timer.subject === 'FullTest' && timer.sectionId !== 7)
+      (timer.subject === 'FullTest' && timer.sectionId !== 7) ||
+      (params.mode === 'package')
       )
     ) {
       Modal.show('ModalAlert', {
@@ -411,7 +432,11 @@ export default class Header extends Component {
         width: 400,
         isUnhide: true,
         buttons: [
-          { title: isFull !== 'true' ? '提交' : 'OK', onClick: () => this.handleTimeExpried() },
+          { title:
+            params.mode !== 'package' ? (isFull !== 'true' ? '提交' : 'OK') :
+              (step.subject === get(stepList, `${stepList.length - 2}.subject`) ? '提交' : 'Next'),
+          onClick: () => this.handleTimeExpried(),
+          },
         ],
         component: isFull !== 'true' ? (
           <View className={styles.modalAlert}>
@@ -420,7 +445,13 @@ export default class Header extends Component {
               src={require('../assets/default.png')}
             />
             <View className={styles.modalAlertText}>
-              时间已耗尽，点击“提交”生成测评报告
+              时间已耗尽，点击
+              {
+                params.mode !== 'package' ?
+                  '点击“提交”生成测评报告'
+                : (step.subject === get(stepList, `${stepList.length - 2}.subject`) ?
+                '“提交”生成您的测评报告' : '“Next”继续')
+              }
             </View>
           </View>
         ) : (
@@ -428,7 +459,8 @@ export default class Header extends Component {
             <View className={styles.modalAlertText}>
               时间已耗尽，点击
               {
-                step.sectionId === 6 ? '“提交”生成测评报告' : '“Next”继续'
+                params.mode !== 'package' &&
+                step.sectionId === 6 ? '“提交”生成测评报告' : '“Next”'
               }
             </View>
           </View>
@@ -453,7 +485,6 @@ export default class Header extends Component {
       isEnd: cntIsEnd,
     });
   }
-
   // 隐藏显示时间
   toggleTimer() {
     const { timer } = this.props;
@@ -719,7 +750,6 @@ export default class Header extends Component {
     const { mode, exerciseId, practiceId } = params;
     const { questionIndex, questionCount } = step;
     const { volume, isShowVolume, isShowShortcutTip } = this.state;
-    console.log('unavailableButtons:', unavailableButtons);
     return (
       <View className={[styles.container, mode === 'test' && styles.containerTest]}>
         {mode === 'test' && isFull !== 'true' && this.tipCard()}

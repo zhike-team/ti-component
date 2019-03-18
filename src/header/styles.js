@@ -1,7 +1,4 @@
 import { StyleSheet } from 'aphrodite';
-import Utils from '../utils';
-
-const { getBodyWidth } = Utils;
 
 // tip 动画
 const tipAnimation = {

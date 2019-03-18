@@ -768,7 +768,7 @@ export default class Header extends Component {
         </View>
 
         {
-          (mode !== 'test' && mode !== 'package') || (mode === 'package' && step.questionIndex > 1) &&
+          (mode !== 'test' && mode !== 'package') || (mode === 'package' && step.index > 1) &&
             <View className={styles.question}>
               {
                 questionIndex && questionCount &&

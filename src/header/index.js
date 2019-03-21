@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { View, Image, Button } from '@zhike/ti-ui';
-import { history } from 'routers';
 import cookie from 'cookie';
 import { css } from 'aphrodite';
 import { get } from 'lodash';
@@ -125,6 +124,7 @@ export default class Header extends Component {
     return this.instance.props.timer ? (this.instance.props.timer.time || 0) : 0;
   }
   static defaultProps = {
+    history: {},
     name: '',
     setTimer: () => {},
     getUploadSignature: () => {},
@@ -138,6 +138,7 @@ export default class Header extends Component {
   };
   // 参数
   static propTypes = {
+    history: PropTypes.object,
     params: PropTypes.object.isRequired,
     name: PropTypes.string,
     step: PropTypes.object.isRequired,
@@ -332,7 +333,7 @@ export default class Header extends Component {
 
   // 上一步
   back() {
-    const { step } = this.props;
+    const { step, history } = this.props;
     const { mode, exerciseId, practiceId } = this.props.params;
     const search = global.location.search; // eslint-disable-line
     history.push(`/${mode}/${practiceId}/${exerciseId}/${step.index - 1}${search}`);
@@ -340,7 +341,7 @@ export default class Header extends Component {
 
   // 下一步
   next() {
-    const { timer, step, params } = this.props;
+    const { timer, step, params, history } = this.props;
     const { mode, exerciseId, practiceId } = params;
     const search = global.location.search; // eslint-disable-line
     // 完整版的测评 有一个进度提示的弹框
@@ -381,7 +382,7 @@ export default class Header extends Component {
 
   // 处理倒计时结束
   handleTimeExpried() {
-    const { stepList, step, params } = this.props;
+    const { stepList, step, params, history } = this.props;
     const { mode, exerciseId, practiceId } = this.props.params;
     const search = global.location.search; // eslint-disable-line
     if (params.mode !== 'package' && isFull === 'true') {
@@ -740,7 +741,7 @@ export default class Header extends Component {
 
   // 渲染
   render() {
-    const { timer, step, params, name } = this.props;
+    const { timer, step, params, name, history } = this.props;
     const search = global.location.search; // eslint-disable-line
     const noPause = decodeURIComponent(search.match(new RegExp('[?#&]noPause=([^?#&]+)', 'i')) ? RegExp.$1 : '');
     const redirect = decodeURIComponent(search.match(new RegExp('[?#&]redirect=([^?#&]+)', 'i')) ? RegExp.$1 : '');

@@ -1,6 +1,6 @@
 {
   "name": "@zhike/ti-component",
-  "version": "1.2.34",
+  "version": "1.2.35",
   "description": "common components for Zhike-tiku",
   "main": "lib/index.js",
   "files": [

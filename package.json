@@ -10,7 +10,7 @@
     "build": "webpack --config webpack.config.js",
     "deploy-storybook": "storybook-to-ghpages",
     "build-storybook": "build-storybook -c stories",
-    "storybook": "start-storybook -p 3006 -c stories"
+    "storybook": "start-storybook -p 3002 -c stories"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

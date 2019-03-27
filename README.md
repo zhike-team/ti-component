@@ -3,7 +3,7 @@
 
 ## demo
 
-[点击查看在线demo] (https://zhike-team.github.io/ti-component/)或按照以下方法在本地运行demo
+[点击查看在线demo](https://zhike-team.github.io/ti-component/)或按照以下方法在本地运行demo
 
 ```bash
 npm install

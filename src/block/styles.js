@@ -238,4 +238,7 @@ export default StyleSheet.create({
     lineHeight: '40px',
     verticalAlign: 'baseline',
   },
+  kfformula: {
+    verticalAlign: 'middle',
+  },
 });

@@ -6,7 +6,7 @@ import Article from '../show/article';
 import SearchWords from '../src/search_words';
 import { material1, material2, material3, tableBlank,
   material5, material6, material7, material8, material9,
-  material10, material11, material12, material13, material14,
+  material10, material11, material12, material13, material14, material15,
   question1, question2 } from './article_data';
 import styles from './styles';
 
@@ -123,6 +123,18 @@ const CenterDecorator = (storyFn) => (
       <br />      
       <Article material={material7}></Article>
     </div>
+  )))
+  .add('数学公式',
+  withInfo(`
+  目前主要是 基础题库的选项有插入数学公式的需求，使用组件方法如下：
+  ~~~js
+    <Article material={material15} isReport={false}></Article>
+  ~~~
+`)
+  (() => (
+      <div style={styles.container}>
+        <Article material={material15} isReport={false}></Article>
+      </div>
   )))
   .add('左对齐', 
   withInfo(`

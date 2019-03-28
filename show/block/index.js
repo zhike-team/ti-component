@@ -193,6 +193,8 @@ export default class Block extends Component {
               />
             </span>,
           );
+        } else if (markup.type === 'Formula') {
+          spans.push(<span key={start} ><img className={css(styles.kfformula)} src={`${markup.value}`} /></span>);
         } else if (markup.type === 'InsertBlank' ||
         markup.type === 'BlankTable' || markup.type === 'DragBlank') {
           let defaultAnswer = '';

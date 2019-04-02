@@ -240,5 +240,6 @@ export default StyleSheet.create({
   },
   kfformula: {
     verticalAlign: 'middle',
+    margin: '-10px -16px 0px -16px',
   },
 });

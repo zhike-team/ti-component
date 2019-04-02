@@ -134,6 +134,8 @@ const CenterDecorator = (storyFn) => (
   (() => (
       <div style={styles.container}>
         <Article material={material15} isReport={false}></Article>
+        <Article material={material15} isReport={false}></Article>
+        <Article material={material15} isReport={false}></Article>
       </div>
   )))
   .add('左对齐', 

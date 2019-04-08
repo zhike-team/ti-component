@@ -20,7 +20,6 @@ export default class Article extends Component {
     handleQuestionSelect: () => {}, // 处理答案选中
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
-    isPositionTip: false,
     paragraphClassName: undefined,
     isIelts: false,
     location: undefined,
@@ -51,8 +50,6 @@ export default class Article extends Component {
     materialIds: PropTypes.array,
     /**  答案集合 */
     answerRsult: PropTypes.array,
-    /**  显示定位 ➡️ 标志 */
-    isPositionTip: PropTypes.bool,
     /**  外部传进来的段落样式 */
     paragraphClassName: PropTypes.object,
     /**  是否是雅思题库 */

@@ -7,7 +7,7 @@ import SearchWords from '../src/search_words';
 import { material1, material2, material3, tableBlank,
   material5, material6, material7, material8, material9,
   material10, material11, material12, material13, material14, material15,
-  question1, question2 } from './article_data';
+  question1, question2, material16, material17, question3 } from './article_data';
 import styles from './styles';
 
 /* eslint-disable */
@@ -463,5 +463,18 @@ const CenterDecorator = (storyFn) => (
   (() => (
       <div style={styles.container}>
         <Article material={material1} question={question1}></Article>
+      </div>
+  )))
+  .add('isPositionTip',
+  withInfo(`
+  雅思 定位箭头➡️，使用组件方法如下：
+  ~~~js
+    <Article material={material16} question={question3} isTextOnly={true}></Article>
+  ~~~
+`)
+  (() => (
+      <div style={styles.container}>
+        <Article material={material16} question={question3} isTextOnly={true} ></Article>
+        <Article material={material17} question={question3} isTextOnly={true} ></Article>
       </div>
   )))

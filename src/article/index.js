@@ -20,7 +20,6 @@ class Article extends Component {
     handleQuestionSelect: () => {}, // 处理答案选中
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
-    isPositionTip: false,
     paragraphClassName: undefined,
     isIelts: false,
   };
@@ -38,7 +37,6 @@ class Article extends Component {
     handleQuestionSelect: PropTypes.func,
     materialIds: PropTypes.array,
     answerRsult: PropTypes.array,
-    isPositionTip: PropTypes.bool,
     paragraphClassName: PropTypes.object,
     isIelts: PropTypes.bool,
   };

@@ -4,11 +4,10 @@ import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router';
 import { View, Input, Image } from '@zhike/ti-ui';
 import { css } from 'aphrodite';
-import { get, sortBy, capitalize, find } from 'lodash';
+import { get, sortBy, capitalize } from 'lodash';
 import Audio from '../audio';
 import { firstUpperCase } from './utils';
 import styles from './styles';
-import imgArrow from '../assets/arrow.png';
 
 class Block extends Component {
   // 参数
@@ -24,7 +23,6 @@ class Block extends Component {
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
     isReport: false,
-    isPositionTip: false,
     paragraphClassName: undefined,
     isIelts: false,
   };
@@ -42,7 +40,6 @@ class Block extends Component {
     answerRsult: PropTypes.array,
     materialIds: PropTypes.array,
     isReport: PropTypes.bool,
-    isPositionTip: PropTypes.bool,
     paragraphClassName: PropTypes.object,
     isIelts: PropTypes.bool,
   };
@@ -239,6 +236,21 @@ class Block extends Component {
               />
             </span>,
           );
+        } else if (markup.type === 'Arrow') {
+          if (markup.value === 'right') {
+            spans.push(
+              <span key={`${start}`}>
+                {markupText}<span className={css(styles.blockArrowBlank)} />
+              </span>,
+            );
+          } else if (markup.value === 'left') {
+            spans.push(
+              <span key={`${start}`} >
+                <span className={css(styles.blockArrowBlank)} />
+                {markupText}
+              </span>,
+            );
+          }
         } else {
           spans.push(
             <span
@@ -299,7 +311,7 @@ class Block extends Component {
 
   // 渲染
   render() {
-    const { p, paragraphClassName, isPositionTip } = this.props;
+    const { p, paragraphClassName } = this.props;
     const props = {};
     if (p.anchor) {
       props.ref = node => {
@@ -318,23 +330,17 @@ class Block extends Component {
         ]}
         {...props}
       >
-        {
+        {/* {
           find(p.markups, markup => markup.type === 'Arrow') &&
           <span
             className={css(styles.blockArrowBlank)}
           />
-        }
+        } */}
 
         {this.renderInline()}
 
         { p.markups && p.markups.length > 0 &&
           this.renderOrigin()
-        }
-
-        {
-          isPositionTip &&
-          !!this.renderInline() &&
-          <img src={imgArrow} alt="arrow" className={css(styles.arrow)} />
         }
       </View>
     );

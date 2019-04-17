@@ -15,7 +15,7 @@ const CenterDecorator = (storyFn) => (
 );
 
 storiesOf('Block', module)
-  .addDecorator(CenterDecorator)
+  // .addDecorator(CenterDecorator)
   .add('p',
   withInfo(`
   段落解析组件 需要处理的文本为必传项 使用组件方法如下：

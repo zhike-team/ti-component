@@ -14,7 +14,7 @@ const CenterDecorator = (storyFn) => (
 );
 
 storiesOf('Error', module)
-  .addDecorator(CenterDecorator)
+  // .addDecorator(CenterDecorator)
   .add('match',
   withInfo(`
     托福、雅思、基础题库的错误页面，统一提取出来。

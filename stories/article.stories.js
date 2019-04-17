@@ -9,6 +9,8 @@ import { material1, material2, material3, tableBlank,
   material10, material11, material12, material13, material14, material15,
   question1, question2 } from './article_data';
 import styles from './styles';
+import { create } from '@storybook/theming';
+
 
 /* eslint-disable */
 let initAnswer = 0;
@@ -18,8 +20,20 @@ const CenterDecorator = (storyFn) => (
     { storyFn() }
   </div>
 );
-  storiesOf('Article', module)
-  .addDecorator(CenterDecorator)
+  storiesOf('Article', module).addParameters({
+    options: {
+      theme: create({
+        base: 'light',
+        brandTitle: 'Storybook',
+        brandUrl: 'https://storybook.js.org',
+        // To control appearance:
+        // brandImage: 'http://url.of/some.svg',
+      }),
+      isFullscreen: false,
+      panelPosition: 'right',
+      isToolshown: true,
+    },
+  })
   .add('段落定位',
     withInfo(`
     富文本渲染组件 具有段落定位的功能 使用组件方法如下：

@@ -48,6 +48,7 @@ storiesOf('SearchWords', module)
     info: {
       text: `
       音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
+
       ~~~js
         <div style={{width: '500px', height: '500px'}}>
           <Scrollbar
@@ -116,6 +117,7 @@ storiesOf('SearchWords', module)
     info: {
       text: `
       音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
+
       ~~~js
         <div style={{width: '500px', height: '500px'}}>
           <Scrollbar
@@ -156,7 +158,8 @@ storiesOf('SearchWords', module)
   ), {
     info: {
       text: `
-      音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
+      音频播放组件 可以传入需要播放的音频路径 使用组件方法如下:
+
       ~~~js
         <div style={{width: '500px', height: '500px'}}>
             <Article material={material1} question={question1}></Article>

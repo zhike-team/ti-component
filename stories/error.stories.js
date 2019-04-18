@@ -1,28 +1,33 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import TableComponent from './tableComponent';
 import Error from '../src/error';
-import styles from './styles';
 
 /* eslint-disable */
-let initAnswer = 0;
-// 故事书装饰者
-const CenterDecorator = (storyFn) => (
-  <div style={styles.container}>
-    { storyFn() }
-  </div>
-);
 
 storiesOf('Error', module)
-  // .addDecorator(CenterDecorator)
+  .addDecorator(withInfo)
+  .addParameters({
+    info: {
+      // Make a default for all stories in this book,
+      inline: true, // where the components are inlined
+      styles: {
+        header: {
+          h1: {
+            color: '#62C9FF',
+          },
+          h2: {
+            color: '#32363A',
+          }
+        },
+      },
+      source: false,
+      },
+    },
+  )
   .add('match',
-  withInfo(`
-    托福、雅思、基础题库的错误页面，统一提取出来。
-    需要的传入 带有路径参数的match
-    path: "/error/:type/:retryUrl?"
-    使用组件方法如下：
-`)
-  (() => (
+  () => (
       <Error
       match={{
         params: {
@@ -30,20 +35,19 @@ storiesOf('Error', module)
           type: "save"
         }}}
       ></Error>
-  )))
+  ), {
+    info: {
+      text: `
+      托福、雅思、基础题库的错误页面，统一提取出来。
+      需要的传入 带有路径参数的match
+      path: "/error/:type/:retryUrl?"
+      使用组件方法如下：
+    `,
+    TableComponent,
+    }
+  })
   .add('type loading',
-  withInfo(`
-    错误页面的类型一共有五种
-    loading 题目加载失败...
-    compatible 暂不支持当前浏览器...
-    multiple 对于同一场练习，暂不支持打开多个标签页...
-    upload 答案上传失败...
-    save 数据保存失败...
-  ~~~js
-  <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
-  ~~~
-`)
-  (() => (
+  () => (
     <Error
     match={{
       params: {
@@ -51,20 +55,24 @@ storiesOf('Error', module)
         type: "loading"
       }}}
       ></Error>
-  )))
+  ), {
+    info: {
+      text: `
+      错误页面的类型一共有五种
+      loading 题目加载失败...
+      compatible 暂不支持当前浏览器...
+      multiple 对于同一场练习，暂不支持打开多个标签页...
+      upload 答案上传失败...
+      save 数据保存失败...
+      ~~~js
+      <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
+      ~~~
+    `,
+  TableComponent,
+    }
+  })
   .add('type compatible',
-  withInfo(`
-    错误页面的类型一共有五种
-    loading 题目加载失败...
-    compatible 暂不支持当前浏览器...
-    multiple 对于同一场练习，暂不支持打开多个标签页...
-    upload 答案上传失败...
-    save 数据保存失败...
-  ~~~js
-  <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
-  ~~~
-`)
-  (() => (
+  () => (
     <Error
     match={{
       params: {
@@ -72,20 +80,24 @@ storiesOf('Error', module)
         type: "compatible"
       }}}
       ></Error>
-  )))
+  ), {
+    info: {
+      text: `
+        错误页面的类型一共有五种
+        loading 题目加载失败...
+        compatible 暂不支持当前浏览器...
+        multiple 对于同一场练习，暂不支持打开多个标签页...
+        upload 答案上传失败...
+        save 数据保存失败...
+      ~~~js
+      <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
+      ~~~
+    `,
+  TableComponent,
+    }
+  })
   .add('type multiple',
-  withInfo(`
-    错误页面的类型一共有五种
-    loading 题目加载失败...
-    compatible 暂不支持当前浏览器...
-    multiple 对于同一场练习，暂不支持打开多个标签页...
-    upload 答案上传失败...
-    save 数据保存失败...
-  ~~~js
-  <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
-  ~~~
-`)
-  (() => (
+  () => (
     <Error
     match={{
       params: {
@@ -93,20 +105,22 @@ storiesOf('Error', module)
         type: "multiple"
       }}}
       ></Error>
-  )))
+  ), {
+    info: {
+      text :`错误页面的类型一共有五种
+      loading 题目加载失败...
+      compatible 暂不支持当前浏览器...
+      multiple 对于同一场练习，暂不支持打开多个标签页...
+      upload 答案上传失败...
+      save 数据保存失败...
+      ~~~js
+        <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
+      ~~~`,
+  TableComponent,
+    }
+  })
   .add('type upload',
-  withInfo(`
-    错误页面的类型一共有五种
-    loading 题目加载失败...
-    compatible 暂不支持当前浏览器...
-    multiple 对于同一场练习，暂不支持打开多个标签页...
-    upload 答案上传失败...
-    save 数据保存失败...
-  ~~~js
-  <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
-  ~~~
-`)
-  (() => (
+  () => (
     <Error
     match={{
       params: {
@@ -114,17 +128,24 @@ storiesOf('Error', module)
         type: "upload"
       }}}
       ></Error>
-  )))
+  ), {
+    info: {
+      text: `
+      错误页面的类型一共有五种
+      loading 题目加载失败...
+      compatible 暂不支持当前浏览器...
+      multiple 对于同一场练习，暂不支持打开多个标签页...
+      upload 答案上传失败...
+      save 数据保存失败...
+    ~~~js
+    <Block p={p1} answer={['答案一', '答案二', '答案三', '答案四',]}></Block>
+    ~~~
+  `,
+  TableComponent,
+    }
+  })
   .add('type save',
-  withInfo(`
-    错误页面的类型一共有五种
-    loading 题目加载失败...
-    compatible 暂不支持当前浏览器...
-    multiple 对于同一场练习，暂不支持打开多个标签页...
-    upload 答案上传失败...
-    save 数据保存失败...
-`)
-  (() => (
+  () => (
     <Error
     match={{
       params: {
@@ -132,4 +153,14 @@ storiesOf('Error', module)
         type: "save"
       }}}
       ></Error>
-  )))
+  ), {
+    info: {
+      text: `错误页面的类型一共有五种
+      loading 题目加载失败...
+      compatible 暂不支持当前浏览器...
+      multiple 对于同一场练习，暂不支持打开多个标签页...
+      upload 答案上传失败...
+      save 数据保存失败...`,
+      TableComponent,
+    }
+  })

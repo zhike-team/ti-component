@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import TableComponent from './tableComponent';
 import Header from '../src/header';
 
 const headerData = {
@@ -214,12 +215,35 @@ const headerData = {
 
 /* eslint-disable */
 storiesOf('Header', module)
+	.addDecorator(withInfo)
+	.addParameters({
+		info: {
+			// Make a default for all stories in this book,
+			inline: true, // where the components are inlined
+			styles: {
+				header: {
+					h1: {
+						color: '#62C9FF',
+					},
+					h2: {
+						color: '#32363A',
+					}
+				},
+			},
+			source: false,
+			},
+		},
+	)
   .add('题库项目必用组件，用来控制当前步骤和练习计时',
-		withInfo(`音频播放器组件案例  使用组件方法如下：
-			<Header {...headerData}></Header>
-		`)
-		(() =>
+		() =>
 			(<Header 
 				{...headerData}
 			/>)
-		))
+		, {
+			info: {
+				text: `音频播放器组件案例  使用组件方法如下：
+				<Header {...headerData}></Header>
+			`,
+			TableComponent
+			}
+		})

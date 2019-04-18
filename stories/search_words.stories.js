@@ -8,27 +8,31 @@ import Modal from '../show/modal';
 import Article from '../show/article';
 import { material1, question1, answerAnalysis } from './article_data';
 import styles from './styles';
+import TableComponent from './tableComponent';
 
 /* eslint-disable */
 storiesOf('SearchWords', module)
+  .addDecorator(withInfo)
+  .addParameters({
+    info: {
+      // Make a default for all stories in this book,
+      inline: true, // where the components are inlined
+      styles: {
+        header: {
+          h1: {
+            color: '#62C9FF',
+          },
+          h2: {
+            color: '#32363A',
+          }
+        },
+      },
+      source: false,
+      },
+    },
+  )
   .add('SearchWords ',
-  withInfo(`
-  音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
-  ~~~js
-    <div style={{width: '500px', height: '500px'}}>
-      <Scrollbar
-        onScrollStart={() => {SearchWords.hide()}}
-      >
-        <Article material={material1} question={question1}></Article>
-        <SearchWords
-          ref={searchWords => { SearchWords.instance = searchWords; }}
-          getSearchWord="https://api.smartstudy.com/word/brief"
-        ></SearchWords>
-      </Scrollbar>
-    </div>
-  ~~~
-`)
- (() => (
+  () => (
     <div style={{width: '500px', height: '500px'}}>
       {/* <Scrollbar
         onScrollStart={() => {SearchWords.hide()}}
@@ -40,25 +44,30 @@ storiesOf('SearchWords', module)
         ></SearchWords>
       {/* </Scrollbar> */}
     </div>
-  )))
+  ), {
+    info: {
+      text: `
+      音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
+      ~~~js
+        <div style={{width: '500px', height: '500px'}}>
+          <Scrollbar
+            onScrollStart={() => {SearchWords.hide()}}
+          >
+            <Article material={material1} question={question1}></Article>
+            <SearchWords
+              ref={searchWords => { SearchWords.instance = searchWords; }}
+              getSearchWord="https://api.smartstudy.com/word/brief"
+            ></SearchWords>
+          </Scrollbar>
+        </div>
+      ~~~
+    `,
+    TableComponent,
+    inline: false,
+    }
+  })
   .add('弹窗 隐藏效果',
-  withInfo(`
-  音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
-  ~~~js
-    <div style={{width: '500px', height: '500px'}}>
-      <Scrollbar
-        onScrollStart={() => {SearchWords.hide()}}
-      >
-        <Article material={material1} question={question1}></Article>
-        <SearchWords
-          ref={searchWords => { SearchWords.instance = searchWords; }}
-          getSearchWord="https://api.smartstudy.com/word/brief"
-        ></SearchWords>
-      </Scrollbar>
-    </div>
-  ~~~
-`)
- (() => (
+  () => (
     <div style={{width: '500px', height: '500px'}}>
       <Scrollbar
         onScrollStart={() => {SearchWords.hide()}}
@@ -103,21 +112,29 @@ storiesOf('SearchWords', module)
         <Modal ref={modal => { Modal.instance = modal; }} isReport={false} />
       </Scrollbar>
     </div>
-  )))
+  ), {
+    info: {
+      text: `
+      音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
+      ~~~js
+        <div style={{width: '500px', height: '500px'}}>
+          <Scrollbar
+            onScrollStart={() => {SearchWords.hide()}}
+          >
+            <Article material={material1} question={question1}></Article>
+            <SearchWords
+              ref={searchWords => { SearchWords.instance = searchWords; }}
+              getSearchWord="https://api.smartstudy.com/word/brief"
+            ></SearchWords>
+          </Scrollbar>
+        </div>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })
   .add('弹窗 答案解析 隐藏效果',
-  withInfo(`
-  音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
-  ~~~js
-    <div style={{width: '500px', height: '500px'}}>
-        <Article material={material1} question={question1}></Article>
-        <SearchWords
-          ref={searchWords => { SearchWords.instance = searchWords; }}
-          getSearchWord="https://api.smartstudy.com/word/brief"
-        ></SearchWords>
-    </div>
-  ~~~
-`)
- (() => (
+  () => (
     <div style={{width: '500px', height: '500px'}}>
       <Scrollbar
         onScrollStart={() => {SearchWords.hide()}}
@@ -136,4 +153,20 @@ storiesOf('SearchWords', module)
         <Modal ref={modal => { Modal.instance = modal; }} isReport={false} />
       </Scrollbar>
     </div>
-  )))
+  ), {
+    info: {
+      text: `
+      音频播放组件 可以传入需要播放的音频路径 使用组件方法如下：
+      ~~~js
+        <div style={{width: '500px', height: '500px'}}>
+            <Article material={material1} question={question1}></Article>
+            <SearchWords
+              ref={searchWords => { SearchWords.instance = searchWords; }}
+              getSearchWord="https://api.smartstudy.com/word/brief"
+            ></SearchWords>
+        </div>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })

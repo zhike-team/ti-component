@@ -10,6 +10,7 @@ export default StyleSheet.create({
     width: 14,
     height: 14,
     border: 'none',
+    display: 'inline-block',
   },
 
   paragraph: {
@@ -50,6 +51,13 @@ export default StyleSheet.create({
   blockArrowBlank: {
     display: 'inline-block',
     width: 20,
+    height: 20,
+    backgroundImage: `url(${imgArrow})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '14px 14px',
+    verticalAlign: 'middle',
+    marginLeft: '5px',
+    marginTop: '5px',
   },
 
   blockAlignLeft: {
@@ -240,5 +248,6 @@ export default StyleSheet.create({
   },
   kfformula: {
     verticalAlign: 'middle',
+    margin: '0px -16px 0px -16px',
   },
 });

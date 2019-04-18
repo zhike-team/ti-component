@@ -6,6 +6,7 @@ const groupMarkupsByPId = source => {
   (source || []).forEach(item => {
     (mappings[item.pid] || (mappings[item.pid] = [])).push(item);
   });
+  console.log('source:', source, mappings);
 
   return mapValues(mappings, arr => sortBy(arr, 'index'));
 };
@@ -17,11 +18,9 @@ export const normalizeArticle = (origin, decorator = {}, isTextOnly) => {
   const paragraphMarkups = groupMarkupsByPId(
     isTextOnly ? origin.paragraphMarkup : decorator.paragraphMarkup,
   );
-
   const inlineMarkups = groupMarkupsByPId(
     isTextOnly ? origin.inlineMarkup : decorator.inlineMarkup,
   );
-
   let hasAnchor = false;
 
   // 生成新的段落

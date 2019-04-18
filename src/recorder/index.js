@@ -105,7 +105,7 @@ export default class Recorder extends Component {
           <Image src={require('../assets/fail.png')} style={{ width: '80px', margin: '20px 0 30px' }} />
           <span className={css(styles.text)}>
             1.请检查浏览器是否允许使用麦克风权限；<br />
-            2.请在修改该权新页面。
+            2.请在修改该权限后，刷新页面。
           </span>
         </View>
       ),

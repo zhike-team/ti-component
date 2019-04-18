@@ -8,7 +8,7 @@ import SearchWords from '../src/search_words';
 import { material1, material2, material3, tableBlank,
   material5, material6, material7, material8, material9,
   material10, material11, material12, material13, material14, material15,
-  question1, question2 } from './article_data';
+  question1, question2, material16, material17, question3 } from './article_data';
 import styles from './styles';
 
 /* eslint-disable */
@@ -174,6 +174,8 @@ const CenterDecorator = (storyFn) => (
   .add('数学公式',
   () => (
       <div style={styles.container}>
+        <Article material={material15} isReport={false}></Article>
+        <Article material={material15} isReport={false}></Article>
         <Article material={material15} isReport={false}></Article>
       </div>
   ), {

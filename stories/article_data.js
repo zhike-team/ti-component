@@ -59,6 +59,132 @@ export const question1 = {
     }
   }],
 };
+export const question3 = {
+  "materials": [
+    {
+        "id": 7476,
+        "qNum": null,
+        "rank": 1,
+        "subStem": null,
+        "image": null,
+        "audio": null,
+        "audioReference": null,
+        "reference": {
+            "paragraphs": [
+                {
+                    "id": "49580577-e7f0-f01f-2b3c-27f4300aabca",
+                    "text": "What is the relationship between disease and the evolution of human societies? ",
+                    "type": "Text"
+                },
+                {
+                    "id": "c72ed59b-166f-3949-c7f0-119d427cf033",
+                    "text": "Epidemiology is the study of the causes, distribution, and control of diseases in populations. Throughout history, there have been general trends in the relationship between diseases and the human species. Anthropologist George Armelagos has outlined these trends and refers to them as three epidemiological transitions. For most of our species in history, we lived in small, widely dispersed, nomadic groups. Our ancestors certainly experienced diseases of various sorts and would have come into contact with new diseases as they migrated to new environments. But infectious disease may not have had serious effects on large numbers of people or many different populations, since diseases would have had little chance of being passed on to many other humans.",
+                    "type": "Text"
+                },
+                {
+                    "id": "ab33a6c7-8d09-14df-febf-8f005c2346b4",
+                    "text": "When some people began to settle down and produce their food through farming and animal domestication starting about 10,000 years ago, the first epidemiological transition occurred. Infectious diseases increased in impact, as larger and denser concentrations of people provided greater opportunity for disease to be passed from host to host. Animal domestication may have brought people into contact with new diseases previously limited to other species. Working the soil would have exposed farmers to insects and other pathogens. Irrigation in some areas provided breeding places for mosquitoes, increasing the incidence of malaria and other mosquito-borne diseases. Sanitation problems caused by larger, more sedentary populations would have helped transmit diseases in human waste, as would the use of animal dung for fertilizer. In addition, agriculture also led to a narrowing of food sources, as compared to the varied diets of hunters and gatherers. This could have resulted in nutritional deficiencies; moreover, the storage of food surpluses attracted new disease carriers such as insects and rats. Trade between settled communities helped spread diseases over large geographic areas, as in the case of the Black Death in Europe. Epidemics, in the sense of diseases that affect a large number of populations at the same time, were essentially nonexistent until the development of agricultural economies.",
+                    "type": "Text"
+                },
+                {
+                    "id": "73b465b9-12a1-9f62-d782-00ce5adbb777",
+                    "text": "Beginning in the last years of the nineteenth century and continuing into the twentieth, we experienced the second epidemiological transition. With modern medical science providing immunizations and antibiotics and with better public health measures and improved nutrition, many infectious diseases were brought under control, or even eliminated. In terms of what ailed and killed us, there was a shift to chronic diseases such as heart and lung diseases. The increase in many of these came not only from the fact that fewer people were dying from infectious disease and were living longer but also from the results of modern lifestyles in developed countries and among the upper classes of developing countries' more sedentary life leading to less physical activity; more stress; environmental pollution; and high-fat diets. But at least, we thought, many of these problems were things we could potentially control; all those infectious epidemics were of the past.",
+                    "type": "Text"
+                },
+                {
+                    "id": "d044d37c-834f-2d8d-2d92-19e966a924ae",
+                    "text": "But on the heels of the second transition had come the third epidemiological transition, and we are in it now. New diseases are emerging, and old ones are returning. Both of these phenomena can be understood in terms of evolutionary theory. The return of old diseases is the result of the fact that microorganisms are evolving species themselves. For example, new and serious antibiotic-resistant strains of tuberculosis have recently appeared. This evolution may have been encouraged by what some authorities consider our overuse of antibiotics, giving microorganisms a greater chance to evolve resistance by exposing them to a constant barrage of selective challenges. Some bacteria reproduce hourly, and so the processes of genetic mutation and natural selection are speeded up in these species.",
+                    "type": "Text"
+                },
+                {
+                    "id": "127a02c2-11f1-5a21-37cc-ede452fc407b",
+                    "text": "Emerging diseases are also the result of human activity in the modern world, which brings more people into contact with more diseases, some of which were unheard of even a few decades ago. As people and their products become more mobile, and as our populations spread into previously little-inhabited areas, cutting down forests and otherwise altering ecological conditions, we contact other species that may carry diseases to which they are immune but that prove deadly to us.",
+                    "type": "Text"
+                }
+            ],
+            "inlineMarkup": null,
+            "articleMarkup": {
+                "headPid": "c72ed59b-166f-3949-c7f0-119d427cf033",
+                "tailPid": "c72ed59b-166f-3949-c7f0-119d427cf033",
+                "anchorPid": "c72ed59b-166f-3949-c7f0-119d427cf033"
+            },
+            "paragraphMarkup": [
+                {
+                    "pid": "c72ed59b-166f-3949-c7f0-119d427cf033",
+                    "type": "Arrow",
+                    "value": ""
+                }
+            ]
+        },
+        "direction": null,
+        "videoTimeRangeId": 3,
+        "choices": [
+            {
+                "text": "There were very few infectious diseases early in human history.",
+                "image": null,
+                "option": "A"
+            },
+            {
+                "text": "Population groups did not move around enough to be exposed to new diseases.",
+                "image": null,
+                "option": "B"
+            },
+            {
+                "text": "Many disease-causing organisms had features that made them difficult to pass on to other humans.",
+                "image": null,
+                "option": "C"
+            },
+            {
+                "text": "Population groups did not have enough contact with each other to spread diseases widely.",
+                "image": null,
+                "option": "D"
+            }
+        ],
+        "insertSentence": null,
+        "positionTip": {
+            "paragraphs": [
+                {
+                    "id": "08e09e31-f66d-a873-a1ba-665c70c817bc",
+                    "text": "Paragraph 2 is marked with",
+                    "type": "Text"
+                }
+            ],
+            "inlineMarkup": [
+                {
+                    "pid": "08e09e31-f66d-a873-a1ba-665c70c817bc",
+                    "type": "Arrow",
+                    "index": 23,
+                    "value": "right",
+                    "length": 3
+                }
+            ],
+            "articleMarkup": null,
+            "paragraphMarkup": null
+        },
+        "answer": [
+            3
+        ],
+        "analysis": {
+            "id": "a574e778-151f-3909-3da0-9dae36e7e79f",
+            "paragraphs": [
+                {
+                    "id": "7583e8ef-c003-b5b8-0247-383bce5883f6",
+                    "text": "根据infectious diseases定位到第2段最后一句话，后半句since给出了原因，疾病几乎没有可能被传播给其他人，即人群之间的接触机会很少，所以答案选D。",
+                    "type": "Text"
+                }
+            ],
+            "inlineMarkup": null,
+            "articleMarkup": null,
+            "paragraphMarkup": null
+        },
+        "examples": null,
+        "questionId": 154958,
+        "origin": null,
+        "score": null,
+        "labels": null
+    }
+]
+};
 
 export const material1 = {
   paragraphs: [
@@ -620,4 +746,46 @@ export const answerAnalysis = {
 export const material15 = {
   inlineMarkup:[{pid: "f1c64920-7385-aea4-09a4-f21b8892813a", type: "Formula", index: 7, value: "data:image/png;base64,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", length: 2}],
   paragraphs:[{id: "f1c64920-7385-aea4-09a4-f21b8892813a", text: "测试的时候一定要细心哈", type: "Text"}]
+};
+
+export const material16 = {
+  "paragraphs": [
+      {
+          "id": "08e09e31-f66d-a873-a1ba-665c70c817bc",
+          "text": "Paragraph 2 is marked with",
+          "type": "Text"
+      }
+  ],
+  "inlineMarkup": [
+      {
+          "pid": "08e09e31-f66d-a873-a1ba-665c70c817bc",
+          "type": "Arrow",
+          "index": 23,
+          "value": "right",
+          "length": 3
+      }
+  ],
+  "articleMarkup": null,
+  "paragraphMarkup": null
+};
+
+export const material17 = {
+  "paragraphs": [
+      {
+          "id": "08e09e31-f66d-a873-a1ba-665c70c817bc",
+          "text": "Paragraph 2 is marked with",
+          "type": "Text"
+      }
+  ],
+  "inlineMarkup": [
+      {
+          "pid": "08e09e31-f66d-a873-a1ba-665c70c817bc",
+          "type": "Arrow",
+          "index": 23,
+          "value": "left",
+          "length": 3
+      }
+  ],
+  "articleMarkup": null,
+  "paragraphMarkup": null
 };

@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { View, Input, Image } from '@zhike/ti-ui';
 import { css } from 'aphrodite';
-import { get, sortBy, capitalize, find } from 'lodash';
+import { get, sortBy, capitalize } from 'lodash';
 import Audio from '../audio';
 import { firstUpperCase } from './utils';
 import styles from './styles';
-import imgArrow from '../assets/arrow.png';
 
 export default class Block extends Component {
   // 参数
@@ -23,7 +22,6 @@ export default class Block extends Component {
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
     isReport: false,
-    isPositionTip: false,
     paragraphClassName: undefined,
     isIelts: false,
     location: undefined,
@@ -55,8 +53,6 @@ export default class Block extends Component {
     materialIds: PropTypes.array,
     /**  是否是报告页 */
     isReport: PropTypes.bool,
-    /**  显示定位 ➡️ 标志 */
-    isPositionTip: PropTypes.bool,
     /**  外部传进来的段落样式 */
     paragraphClassName: PropTypes.object,
     /**  是否是雅思题库 */
@@ -109,6 +105,7 @@ export default class Block extends Component {
       let cntAnswer = initAnswer;
       while (inlineMarkups.length) {
         const markup = inlineMarkups.shift();
+        console.log('markup:', markup);
         // 提取当前标记前的文字
         if (markup.index !== start) {
           if (p.text.substring(start, markup.index) !== '') {
@@ -255,6 +252,21 @@ export default class Block extends Component {
               />
             </span>,
           );
+        } else if (markup.type === 'Arrow') {
+          if (markup.value === 'right') {
+            spans.push(
+              <span key={`${start}`}>
+                {markupText}<span className={css(styles.blockArrowBlank)} />
+              </span>,
+            );
+          } else if (markup.value === 'left') {
+            spans.push(
+              <span key={`${start}`} >
+                <span className={css(styles.blockArrowBlank)} />
+                {markupText}
+              </span>,
+            );
+          }
         } else {
           spans.push(
             <span
@@ -315,7 +327,7 @@ export default class Block extends Component {
 
   // 渲染
   render() {
-    const { p, paragraphClassName, isPositionTip } = this.props;
+    const { p, paragraphClassName } = this.props;
     const props = {};
     if (p.anchor) {
       props.ref = node => {
@@ -334,12 +346,12 @@ export default class Block extends Component {
         ]}
         {...props}
       >
-        {
+        {/* {
           find(p.markups, markup => markup.type === 'Arrow') &&
           <span
             className={css(styles.blockArrowBlank)}
           />
-        }
+        } */}
 
         {this.renderInline()}
 
@@ -347,11 +359,11 @@ export default class Block extends Component {
           this.renderOrigin()
         }
 
-        {
+        {/* {
           isPositionTip &&
           !!this.renderInline() &&
           <img src={imgArrow} alt="arrow" className={css(styles.arrow)} />
-        }
+        } */}
       </View>
     );
   }

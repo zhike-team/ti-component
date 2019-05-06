@@ -19,10 +19,10 @@ const loading = {
 export default StyleSheet.create({
   container: {
     width: '100%',
+    height: '100%',
   },
 
   content: {
-    flex: 1,
     flexDirection: 'row',
     fontSize: 14,
     height: 64,
@@ -41,7 +41,10 @@ export default StyleSheet.create({
   },
 
   textContent: {
+    flex: 1,
     marginTop: 34,
+    paddingBottom: 40,
+    overflowY: 'auto',
   },
 
   raw: {

@@ -42,7 +42,7 @@ export default StyleSheet.create({
 
   textContent: {
     flex: 1,
-    marginTop: 34,
+    paddingTop: 34,
     paddingBottom: 40,
     overflowY: 'auto',
   },

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { View, Image } from '@zhike/ti-ui';
+import { View, Image, Scrollbar } from '@zhike/ti-ui';
 import { remove, get } from 'lodash';
 import Article from '../article';
 import Parser from './utils';
+import SearchWords from '../search_words';
 import styles from './styles';
 
 const audioContainer = [];
@@ -466,9 +467,9 @@ export default class Audio extends Component {
         }
         {
           text && materialType === 'listenTranslation' &&
-          <View className={styles.textContent}>
+          <Scrollbar className={styles.textContent} onScrollStart={() => { SearchWords.hide(); }}>
             {this.generateListeningText()}
-          </View>
+          </Scrollbar>
         }
         {
           !text && show && materialType === 'listenTranslation' &&

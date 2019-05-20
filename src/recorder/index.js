@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RecordRTCPromisesHandler } from 'recordrtc';
+import { RecordRTCPromisesHandler, StereoAudioRecorder } from 'recordrtc';
 import { View, Image } from '@zhike/ti-ui';
 import { css } from 'aphrodite';
 import Modal from '../modal';
@@ -17,36 +17,56 @@ export default class Recorder extends Component {
       return;
     }
     this.isInit = true;
+    // 老的浏览器可能根本没有实现 mediaDevices，所以我们可以先设置一个空的对象
+    if (navigator.mediaDevices === undefined) { 
+      navigator.mediaDevices = {};
+    }
 
-    navigator.getUserMedia = // eslint-disable-line
-      navigator.getUserMedia || navigator.webkitGetUserMedia; // eslint-disable-line
+    // 一些浏览器部分支持 mediaDevices。我们不能直接给对象设置 getUserMedia 
+    // 因为这样可能会覆盖已有的属性。这里我们只会在没有getUserMedia属性的时候添加它。
+    if (navigator.mediaDevices.getUserMedia === undefined) {
+      navigator.mediaDevices.getUserMedia = function(constraints) {
+
+        // 首先，如果有getUserMedia的话，就获得它
+        var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+        // 一些浏览器根本没实现它 - 那么就返回一个error到promise的reject来保持一个统一的接口
+        if (!getUserMedia) {
+          return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+        }
+
+        // 否则，为老的navigator.getUserMedia方法包裹一个Promise
+        return new Promise(function(resolve, reject) {
+          getUserMedia.call(navigator, constraints, resolve, reject);
+        });
+      }
+    }
   }
 
   // 开始录音
   static start({ mode, skip, callback = () => {} }) {
     this.init();
     this.destroy();
-    if (!navigator.getUserMedia) { // eslint-disable-line
+    if (!navigator.mediaDevices.getUserMedia) { // eslint-disable-line
       return this.onError({ mode, skip });
     }
-
-    navigator.getUserMedia( // eslint-disable-line
-      { audio: true },
-      stream => {
-        this.recorder = new RecordRTCPromisesHandler(stream, { type: 'audio' });
-        this.recorder.startRecording()
-          .then(() => callback())
-          .catch(() => this.onError({ mode, skip }));
-      },
-      () => this.onError({ mode, skip }),
-    );
+    // navigator.mediaDevices.getUserMedia
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then( async stream => {
+      this.recorder = new RecordRTCPromisesHandler(stream, { type: 'audio', recorderType: StereoAudioRecorder, });
+      await this.recorder.startRecording()
+      callback();
+    })
+    .catch(err =>{
+      console.log(err.name + ": " + err.message);
+    });
   }
 
   // 暂停录音
   static pause() {
     try {
       // 组件库有问题，升级之后似乎并未内置该方法
-      this.recorder.pauseRecording();
+      this.recorder && this.recorder.recordRTC && this.recorder.recordRTC.pauseRecording();
     } catch (e) {
       console.log(e);
     }
@@ -56,25 +76,24 @@ export default class Recorder extends Component {
   static resume() {
     try {
       // 组件库有问题，升级之后似乎并未内置该方法
-      this.recorder.resumeRecording();
+      this.recorder.recordRTC && this.recorder.recordRTC.resumeRecording();
     } catch (e) {
       console.log(e);
     }
   }
 
   // 停止录音
-  static stop() {
-    return this.recorder.stopRecording()
-      .then(url => {
-        const blob = this.recorder.getBlob();
-        return { url, blob };
-      });
+  static async stop () {
+    await this.recorder.stopRecording();
+    const url = await this.recorder.getDataURL().then(url => url);
+    const blob = await this.recorder.getBlob().then(blob => blob);  
+    return { url, blob };
   }
 
   // 卸载录音
   static destroy() {
-    if (this.recorder && this.recorder.destroy) {
-      this.recorder.destroy();
+    if (this.recorder && this.recorder.recordRTC && this.recorder.recordRTC.destroy) {
+      this.recorder.recordRTC.destroy();
     }
   }
 

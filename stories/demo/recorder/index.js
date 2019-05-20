@@ -73,14 +73,16 @@ export default class RecorderDemo extends Component {
   }
 
   // 停止录音
-  stopRecord() {
+  async stopRecord() {
     if (this.timeInterval) {
       clearInterval(this.timeInterval);
       this.timeInterval = undefined;
     }
     this.setState({ recordStatus: 'stop' });
     const { time } = this.state;
-    Recorder.stop().then(data => {
+    console.log('Recorder.stop():', Recorder.stop());
+    await Recorder.stop().then(data => {
+      console.log('data:', data);
       this.setState({
         recordUrl: data.url,
       });
@@ -266,10 +268,10 @@ export default class RecorderDemo extends Component {
               textClassName={recordUrl && styles.grayText}
               isAvailable={(uploadStatus !== 'uploading' && recordStatus !== 'play')}
               text={recordStatus === 'start' ? '停止录音' : recordUrl ? '重新录音' : '开始录音'}
-              onClick={() => {
+              onClick={async () => {
                 if (uploadStatus === 'uploading') return false;
                 if (recordStatus === 'start') {
-                  this.stopRecord();
+                  await this.stopRecord();
                 } else {
                   this.startRecord();
                 }

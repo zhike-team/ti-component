@@ -1,17 +1,27 @@
 # ti-component
 题库的通用组件，提取为依赖库并统一发布在npm
 
-## demo
+## demo本地运行指南
 
 [点击查看在线demo](https://zhike-team.github.io/ti-component/)或按照以下方法在本地运行demo
 
 ```bash
-npm install
+cnpm install 
 npm run storybook
 open http://localhost:3002/
 ```
+```js
+目前只支持 cnpm启动；部分电脑npm启动还存在问题，目前还未解决；
 
-## 使用指南
+  如果你本地未安装 cnpm命令；可以使用淘宝镜像进行安装
+
+  npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+
+
+
+
+## 直接使用npm包指南
 
 ### 安装
 

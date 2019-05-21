@@ -130,9 +130,8 @@ export default class Recorder extends Component {
           {
             key === 1 &&
             <span className={css(styles.text1)}>
-             因Safari浏览器录音权限限制，<br />
-             如果要继续录音，请手动刷新页面<br />
-            （建议使用Chrome浏览器）
+             因Safari浏览器录音权限限制，如果要继续录音，<br />
+             请手动刷新页面（建议使用Chrome浏览器）<br />
             </span>
           }
           {

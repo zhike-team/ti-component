@@ -80,9 +80,7 @@ export default class RecorderDemo extends Component {
     }
     this.setState({ recordStatus: 'stop' });
     const { time } = this.state;
-    console.log('Recorder.stop():', Recorder.stop());
     await Recorder.stop().then(data => {
-      console.log('data:', data);
       this.setState({
         recordUrl: data.url,
       });

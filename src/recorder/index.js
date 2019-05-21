@@ -11,6 +11,7 @@ export default class Recorder extends Component {
   static isInit;
   static recorder;
 
+  /* eslint-disable */
   // 初始化
   static init() {
     if (this.isInit) {
@@ -45,8 +46,8 @@ export default class Recorder extends Component {
 
   // 开始录音
   static start({ mode, skip, callback = () => {} }) {
+    // this.destroy();
     this.init();
-    this.destroy();
     if (!navigator.mediaDevices.getUserMedia) { // eslint-disable-line
       return this.onError({ mode, skip });
     }
@@ -55,7 +56,12 @@ export default class Recorder extends Component {
     .then( async stream => {
       this.recorder = new RecordRTCPromisesHandler(stream, { type: 'audio', recorderType: StereoAudioRecorder, });
       await this.recorder.startRecording()
-      callback();
+      .then(() => callback())
+      .catch(error => {
+        console.log('getTracks:', stream.getTracks());
+        this.onError({ mode, skip, key: 1 });
+        console.error('startRecording failure', error)
+      })
     })
     .catch(err =>{
       console.log(err.name + ": " + err.message);
@@ -75,7 +81,6 @@ export default class Recorder extends Component {
   // 继续录音
   static resume() {
     try {
-      // 组件库有问题，升级之后似乎并未内置该方法
       this.recorder.recordRTC && this.recorder.recordRTC.resumeRecording();
     } catch (e) {
       console.log(e);
@@ -98,7 +103,7 @@ export default class Recorder extends Component {
   }
 
   // 错误监听
-  static onError({ mode, skip }) {
+  static onError({ mode, skip, key = 0 }) {
     const buttons = [
       {
         title: '刷新页面',
@@ -122,10 +127,21 @@ export default class Recorder extends Component {
       component: (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Image src={require('../assets/fail.png')} style={{ width: '80px', margin: '20px 0 30px' }} />
-          <span className={css(styles.text)}>
+          {
+            key === 1 &&
+            <span className={css(styles.text1)}>
+             因Safari浏览器录音权限限制，<br />
+             如果要继续录音，请手动刷新页面<br />
+            （建议使用Chrome浏览器）
+            </span>
+          }
+          {
+            key === 0 &&
+            <span className={css(styles.text)}>
             1.请检查浏览器是否允许使用麦克风权限；<br />
             2.请在修改该权限后，刷新页面。
           </span>
+          }
         </View>
       ),
     }, onShow, onHide);

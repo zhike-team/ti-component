@@ -32,12 +32,12 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "@storybook/addon-info": "^4.0.11",
-    "@storybook/addon-options": "^5.0.9",
-    "@storybook/react": "^5.0.9",
-    "@storybook/storybook-deployer": "^2.8.1",
-    "@storybook/theming": "^5.0.9",
-    "@zhike/ti-ui": "^1.2.7",
+    "@storybook/addon-info": "4.0.11",
+    "@storybook/addon-options": "5.0.9",
+    "@storybook/react": "5.0.9",
+    "@storybook/storybook-deployer": "2.8.1",
+    "@storybook/theming": "5.0.9",
+    "@zhike/ti-ui": "1.2.7",
     "aphrodite": "^1.2.5",
     "axios": "^0.16.2",
     "babel-cli": "^6.0.0",
@@ -67,7 +67,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "url-loader": "^1.1.1",
-    "webpack": "^3.8.1"
+    "webpack": "3.8.1"
   },
   "repository": {
     "type": "git",

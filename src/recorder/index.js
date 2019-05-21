@@ -54,7 +54,8 @@ export default class Recorder extends Component {
     // navigator.mediaDevices.getUserMedia
     navigator.mediaDevices.getUserMedia({ audio: true })
     .then( async stream => {
-      this.recorder = new RecordRTCPromisesHandler(stream, { type: 'audio', recorderType: StereoAudioRecorder, });
+      const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      this.recorder = new RecordRTCPromisesHandler(stream, !isSafari ? { type: 'audio'} : { type: 'audio', recorderType: StereoAudioRecorder, });
       await this.recorder.startRecording()
       .then(() => callback())
       .catch(error => {

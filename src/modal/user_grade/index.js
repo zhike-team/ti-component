@@ -5,11 +5,10 @@ import { View, Button } from '@zhike/ti-ui';
 import cookie from 'cookie';
 import { cloneDeep } from 'lodash';
 import axios from 'axios';
-import createHistory from 'history/createBrowserHistory';
 import Modal from '../index';
 import styles from './styles';
 
-const history = createHistory();
+const history = require('history').createBrowserHistory;
 
 export default class ModalComponent extends Component {
   // 参数

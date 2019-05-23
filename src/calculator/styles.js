@@ -1,0 +1,73 @@
+import { StyleSheet } from 'aphrodite';
+
+
+export default StyleSheet.create({
+  conatiner: {
+    fontSize: '18px',
+    fontFamily: 'FZLTTHK--GBK1-0',
+    fontWeight: 'normal',
+    lineHeight: '22px',
+    position: 'relative',
+  },
+
+  screen: {
+    width: '208px',
+    height: '40px',
+    background: 'rgba(255,255,255,1)',
+    borderRadius: '2px',
+    color: 'rgba(46,50,54,1)',
+    boxSizing: 'border-box',
+    padding: 0,
+    outline: 'none',
+    textAlign: 'right',
+    fontSize: '18px',
+    fontFamily: 'FZLTTHK--GBK1-0',
+    fontWeight: 'normal',
+    lineHeight: '22px',
+  },
+
+  div_class_buttonlist: {
+    height: 'auto',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    margin: 'auto',
+    alignContent: 'flex-start',
+    width: '210px',
+    marginTop: '4px',
+  },
+  transfer: {
+    backgroundImage: `url(${require('./assets/footer.png')})`,
+    backgroundSize: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 208,
+    height: 40,
+    color: '#fff',
+    marginTop: '1px',
+  },
+  div_class_button: {
+    display: 'inline-block',
+    backgroundColor: 'rgba(211,211,211,1)',
+    width: '40px',
+    height: '40px',
+    boxSizing: 'border-box',
+    fontSize: '20px',
+    cursor: 'pointer',
+    padding: 0,
+    outline: 'none',
+    margin: '1px',
+    border: '1px',
+  },
+  mrNum: {
+    display: 'inline-block',
+    position: 'absolute',
+    left: '16px',
+    top: '45px',
+    transition: 'all 300ms linear 30ms',
+    textAlign: 'right',
+    fontSize: '18px',
+    fontFamily: 'FZLTTHK--GBK1-0',
+    fontWeight: 'normal',
+    lineHeight: '22px',
+  },
+});

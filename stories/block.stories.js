@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import TableComponent from './tableComponent';
 import Block from '../show/block';
-import { p, p1 } from './article_data';
+import { p, p1, p2, p4 } from './article_data';
 import styles from './styles';
 
 /* eslint-disable */
@@ -88,7 +88,7 @@ storiesOf('Block', module)
       text: `
       段落解析组件 可以传入用户处理答案的回调函数 使用组件方法如下：
       ~~~js
-      <Block p={p1} handleAnswer={()=> { alert('～～处理用户作答的回调函数～～');}}></Block>
+      <Block p={p2} handleAnswer={()=> { alert('～～处理用户作答的回调函数～～');}}></Block>
       ~~~
     `,
     TableComponent,
@@ -97,7 +97,7 @@ storiesOf('Block', module)
   .add('isReport',
   () => (
       <div style={styles.container}>
-        <Block p={p1} isReport={true}></Block>
+        <Block p={p2} isReport={true}></Block>
       </div>
   ),
   {
@@ -106,6 +106,23 @@ storiesOf('Block', module)
       段落解析组件 是否为报告页 isReport 使用组件方法如下：
       ~~~js
         <Block p={p1} isReport={true}></Block>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })
+  .add('设置图片宽度',
+  () => (
+      <div style={styles.container}>
+        <Block p={p4} isReport={true} imgWidth={200}></Block>
+      </div>
+  ),
+  {
+    info: {
+      text:   `
+      段落解析组件 支持设置图片宽度 imgWidth 传数字类型 使用组件方法如下：
+      ~~~js
+        <Block p={p4} isReport={true} imgWidth={200}></Block>
       ~~~
     `,
     TableComponent,

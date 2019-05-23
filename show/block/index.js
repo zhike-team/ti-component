@@ -25,6 +25,7 @@ export default class Block extends Component {
     paragraphClassName: undefined,
     isIelts: false,
     location: undefined,
+    imgWidth: 0,
   };
   static propTypes = {
     /**  block组件处理的段落  */
@@ -57,6 +58,8 @@ export default class Block extends Component {
     paragraphClassName: PropTypes.object,
     /**  是否是雅思题库 */
     isIelts: PropTypes.bool,
+    /**  图片宽度 */
+    imgWidth: PropTypes.number,
   };
 
   // 加载
@@ -314,8 +317,11 @@ export default class Block extends Component {
           );
         } else if (type === 'Image') {
           return (
-            <div key={index} className={css(styles.block)}>
-              <Image src={item.uploadPath} className={styles.image} />
+            <div key={index} className={css(styles.block)} style={{ textAlign: 'center' }}>
+              <Image
+                src={item.uploadPath}
+                style={this.props.imgWidth ? { width: `${this.props.imgWidth}px` } : { width: '100%' }}
+              />
             </div>
           );
         }
@@ -334,6 +340,7 @@ export default class Block extends Component {
         this.anchor = node;
       };
     }
+    console.log('sss:', this.props);
     return (
       <View
         className={[styles.paragraph, paragraphClassName,

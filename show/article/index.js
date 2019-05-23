@@ -23,6 +23,7 @@ export default class Article extends Component {
     paragraphClassName: undefined,
     isIelts: false,
     location: undefined,
+    imgWidth: 0,
   };
 
   static propTypes = {
@@ -54,6 +55,8 @@ export default class Article extends Component {
     paragraphClassName: PropTypes.object,
     /**  是否是雅思题库 */
     isIelts: PropTypes.bool,
+    /**  图片宽度 */
+    imgWidth: PropTypes.number,
   };
 
   componentDidMount() {
@@ -81,7 +84,7 @@ export default class Article extends Component {
   render() {
     const { material, question, isTextOnly, handleAnswer,
       answer, isReport, externalInitAnswer, qNum, materialIds,
-      answerRsult, isIelts, paragraphClassName,
+      answerRsult, isIelts, paragraphClassName, imgWidth,
     } = this.props;
     const article = normalizeArticle(
       material,
@@ -135,6 +138,7 @@ export default class Article extends Component {
                 answerRsult={answerRsult}
                 isIelts={isIelts}
                 paragraphClassName={paragraphClassName}
+                imgWidth={imgWidth}
               />
             );
           })

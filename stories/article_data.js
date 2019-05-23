@@ -717,6 +717,27 @@ export const p3 = {
   text:'The creation of life requires a set of chemical elements for making the components of cells.  Life on Earth uses about 25 of the 92 naturally occurring chemical elements, although just 4 of these elements—oxygen, carbon, hydrogen, and nitrogen—make up about 96 percent of the mass of living organisms.  Thus, a first requirement for life might be the presence of most or all of the elements used by life.',
   type:'Text',
 }
+export const p4 = {
+  anchor: false,
+  id:'c7763867-d463-86d9-b766-52de45544b81',
+  inlineMarkups: [
+  ],
+  paragraphMarkup: [
+    { pid: "c7763867-d463-86d9-b766-52de45544b81",
+    "type": "Image",
+    "value": "",
+    "uploadPath": "http://hq-static.smartstudy.com/atheneBackend/1558514732307NfEYXG.png"},
+  ],
+  markups: [
+    { 
+    pid: "c7763867-d463-86d9-b766-52de45544b81",
+    "type": "Image",
+    "value": "",
+    "uploadPath": "http://hq-static.smartstudy.com/atheneBackend/1558514732307NfEYXG.png"}, 
+  ],
+  text:'Soda was obtained largely of certain Mediterranean…tation of inland vegetation of inland vegetation.',
+  type:'Text',
+}
 export const answerAnalysis = {
   inlineMarkup: [
     {pid: "9d23bcc3-1bee-0be8-2385-eee26aab8a3d", type: "Bold", index: 28, length: 8},

@@ -201,9 +201,6 @@ export default StyleSheet.create({
     borderBottom: '1px solid rgba(50,54,58,1) ',
     width: '90%',
   },
-  image: {
-    width: '100%',
-  },
   exercise: {
     boxSizing: 'border-box',
     width: 700,

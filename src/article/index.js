@@ -22,6 +22,7 @@ class Article extends Component {
     answerRsult: [], // 答案集合
     paragraphClassName: undefined,
     isIelts: false,
+    imgWidth: 0,
   };
 
   static propTypes = {
@@ -39,6 +40,7 @@ class Article extends Component {
     answerRsult: PropTypes.array,
     paragraphClassName: PropTypes.object,
     isIelts: PropTypes.bool,
+    imgWidth: PropTypes.number,
   };
 
   componentDidMount() {
@@ -64,9 +66,10 @@ class Article extends Component {
   }
 
   render() {
-    const { material, question, isTextOnly, handleAnswer,
-      answer, isReport, externalInitAnswer, qNum, materialIds,
-      answerRsult, isIelts, paragraphClassName,
+    const { material, question, isTextOnly,
+      answer, isReport, externalInitAnswer,
+      qNum, materialIds, answerRsult, isIelts,
+      paragraphClassName, imgWidth,
     } = this.props;
     const article = normalizeArticle(
       material,
@@ -110,9 +113,7 @@ class Article extends Component {
                 key={p.id}
                 p={p}
                 {...props}
-                handleAnswer={handleAnswer}
                 answer={isReport ? get(question, 'materials.0.answer') : answer}
-                isReport={isReport}
                 initAnswer={externalInitAnswer === -1 ? (initAnswer - count) :
                   (externalInitAnswer + initAnswer - count)}
                 qNum={qNum}
@@ -120,6 +121,7 @@ class Article extends Component {
                 answerRsult={answerRsult}
                 isIelts={isIelts}
                 paragraphClassName={paragraphClassName}
+                imgWidth={imgWidth}
               />
             );
           })

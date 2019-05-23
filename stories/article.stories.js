@@ -556,3 +556,30 @@ const CenterDecorator = (storyFn) => (
       TableComponent,
     }
   })
+  .add('设置图片宽度',
+  () => (
+      <div style={styles.container}>
+        <Article 
+        material={material12}
+        paragraphClassName={styles.paragraph1}
+        isReport={true}
+        imgWidth={200}
+      ></Article>
+      </div>
+  ),
+  {
+    info: {
+      text:   `
+      段落解析组件 支持设置图片宽度 imgWidth 传数字类型 使用组件方法如下：
+      ~~~js
+      <Article 
+        material={material12}
+        paragraphClassName={styles.paragraph1}
+        isReport={true}
+        imgWidth={200}>
+      </Article>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })

@@ -25,6 +25,7 @@ class Block extends Component {
     isReport: false,
     paragraphClassName: undefined,
     isIelts: false,
+    imgWidth: 0,
   };
   static propTypes = {
     p: PropTypes.object.isRequired,
@@ -42,6 +43,7 @@ class Block extends Component {
     isReport: PropTypes.bool,
     paragraphClassName: PropTypes.object,
     isIelts: PropTypes.bool,
+    imgWidth: PropTypes.number,
   };
 
   // 加载
@@ -298,8 +300,11 @@ class Block extends Component {
           );
         } else if (type === 'Image') {
           return (
-            <div key={index} className={css(styles.block)}>
-              <Image src={item.uploadPath} className={styles.image} />
+            <div key={index} className={css(styles.block)} style={{ textAlign: 'center' }}>
+              <Image
+                src={item.uploadPath}
+                style={this.props.imgWidth ? { width: `${this.props.imgWidth}px` } : { width: '100%' }}
+              />
             </div>
           );
         }

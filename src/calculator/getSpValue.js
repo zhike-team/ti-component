@@ -10,7 +10,7 @@
  *  @return 一串运算表达式 只是将需要预处理的数值转换为计算后的数值
  */
 
-let operatorName = ['+','-','/','*','(',')'];
+let operatorName = ['+','-','÷','×','(',')'];
 //判断是否为操作符
 function isOperator(data,priorarr){
     let rev = false;

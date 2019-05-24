@@ -8,7 +8,8 @@ import SearchWordsComponent from './search_words';
 import ErrorComponent from './error';
 import HeaderComponent from './header';
 import UtilsObject from './utils';
-
+import CalculatorComponent from './calculator';
+import DragComponent from './drag';
 
 export const Audio = AudioComponent;
 export const AudioPlayer = AudioPlayerComponent;
@@ -20,4 +21,6 @@ export const SearchWords = SearchWordsComponent;
 export const Error = ErrorComponent;
 export const Header = HeaderComponent;
 export const Utils = UtilsObject;
+export const Calculator = CalculatorComponent;
+export const Drag = DragComponent;
 

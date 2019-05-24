@@ -43,14 +43,14 @@ function Stack(){
 }
 
 
-let operatorName = ['+','-','/','*','(',')'];
+let operatorName = ['+','-','÷','×','(',')'];
 let priorValue = {};
 //优先级函数
 function initPrior(){
     priorValue['+'] = 100;
     priorValue['-'] = 100;
-    priorValue['*'] = 200;
-    priorValue['/'] = 200;
+    priorValue['×'] = 200;
+    priorValue['÷'] = 200;
     priorValue['('] = 1000;
     priorValue[')'] = 0;
 }
@@ -171,9 +171,9 @@ function countSuffixExpression(revarr){
                     result = Number(followdata) + Number(topdata);break;
                 case '-':
                     result = Number(followdata) - Number(topdata);break;
-                case '*':
+                case '×':
                     result = Number(followdata) * Number(topdata);break;
-                case '/':
+                case '÷':
                     result = Number(followdata) / Number(topdata);break;
                 default:
                     return revarr[0];

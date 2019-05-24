@@ -42,7 +42,44 @@ storiesOf('Calculator GRE考试计算器', module)
 			  TableComponent,
 			}
     })
-  .add('Gre 计算器',
+    .add('transferVisible',() =>
+    (<Calculator
+      transferVisible={true}
+      transferResult={ data => {
+        alert(`我拿到了计算结果为:${data}`)
+        }
+      }
+      />), {
+    info: {
+      text: `是否可以点击 获取结果（默认是不可点击）  使用组件方法如下：
+      <Calculator
+      transferVisible={true}
+      transferResult={ data => alert(
+        '我拿到了计算结果～', data
+      )}
+      ></Calculator>
+      `,
+      TableComponent,
+    }
+  })
+  .add('destroy',
+  () =>
+    (<Calculator
+      destroy={() => console.log('组件销毁回调函数')}
+    />)
+  , {
+    info: {
+      text: `组件销毁回调函数  使用组件方法如下：
+      <Calculator
+      destory={ () => alert(
+        '组件销毁回调函数',
+      )}
+      ></Calculator>
+      `,
+      TableComponent,
+    }
+  })
+  .add('默认显示的数值',
   () =>
     (<Calculator
         revdata='0'
@@ -57,3 +94,4 @@ storiesOf('Calculator GRE考试计算器', module)
       TableComponent,
     }
   })
+

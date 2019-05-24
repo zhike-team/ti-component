@@ -4,8 +4,8 @@ import { StyleSheet } from 'aphrodite';
 export default StyleSheet.create({
   conatiner: {
     fontSize: '18px',
-    fontFamily: 'FZLTTHK--GBK1-0',
-    fontWeight: 'normal',
+    fontFamily: 'FZLanTingHei-H-GBK',
+    fontWeight: '600',
     lineHeight: '22px',
     position: 'relative',
   },
@@ -21,8 +21,8 @@ export default StyleSheet.create({
     outline: 'none',
     textAlign: 'right',
     fontSize: '18px',
-    fontFamily: 'FZLTTHK--GBK1-0',
-    fontWeight: 'normal',
+    fontFamily: 'FZLanTingHei-H-GBK',
+    fontWeight: '600',
     lineHeight: '22px',
   },
 
@@ -66,8 +66,17 @@ export default StyleSheet.create({
     transition: 'all 300ms linear 30ms',
     textAlign: 'right',
     fontSize: '18px',
-    fontFamily: 'FZLTTHK--GBK1-0',
-    fontWeight: 'normal',
+    fontFamily: 'FZLanTingHei-H-GBK',
+    fontWeight: '600',
     lineHeight: '22px',
+  },
+  transfer1: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 208,
+    height: 40,
+    color: '#000',
+    marginTop: '1px',
+    backgroundColor: '#c3ccd1',
   },
 });

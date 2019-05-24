@@ -19,7 +19,7 @@ export default class Calculator extends Component {
   static propTypes = {
     /* 销毁组件函数 */
     destroy: PropTypes.func,
-    showTitle: PropTypes.boolean,
+    showTitle: PropTypes.bool,
     title: PropTypes.string,
   };
   // 构造函数
@@ -70,7 +70,7 @@ export default class Calculator extends Component {
   }
 
   // 松开鼠标，设置modal状态为不可移动
-  onMouseUp(e) {
+  onMouseUp() {
     const { moving } = this.state;
     moving && this.setState({ moving: false });
   }

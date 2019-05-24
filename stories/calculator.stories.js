@@ -5,7 +5,7 @@ import Calculator from '../src/calculator';
 import TableComponent from './tableComponent';
 
 /* eslint-disable */
-storiesOf('Calculator', module)
+storiesOf('Calculator GRE考试计算器', module)
   .addDecorator(withInfo)
   .addParameters({
     info: {
@@ -24,14 +24,36 @@ storiesOf('Calculator', module)
       },
     },
   )
-  .add('Gre 计算器',
-		(() =>
-			(<Calculator />)
-		), {
+  .add('transferResult',() =>
+			(<Calculator
+        transferResult={ data => {
+          alert(`我拿到了计算结果为:${data}`)
+          }
+        }
+        />), {
 			info: {
-				text: `音频播放器组件案例  使用组件方法如下：
-				<AudioPlayerDemo></AudioPlayerDemo>
+				text: `计算结果获取函数  使用组件方法如下：
+        <Calculator
+        transferResult={ data => alert(
+          '我拿到了计算结果～', data
+        )}
+        ></Calculator>
 			  `,
 			  TableComponent,
 			}
-		})
+    })
+  .add('Gre 计算器',
+  () =>
+    (<Calculator
+        revdata='0'
+    />)
+  , {
+    info: {
+      text: `计算器默认显示的数值  使用组件方法如下：
+      <Calculator
+        revdata='0'
+      ></Calculator>
+      `,
+      TableComponent,
+    }
+  })

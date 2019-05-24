@@ -139,8 +139,9 @@ export default class Calculator extends Component {
     const oldState = this.state.valueText;
     let valueText, resultNum;
     try {
-      valueText = this.checkClickType(oldState, data).valueText; // eslint-disable-line
-      resultNum = this.checkClickType(oldState, data).resultNum; // eslint-disable-line
+      const data1 = this.checkClickType(oldState, data);
+      valueText = data1.valueText; // eslint-disable-line
+      resultNum = data1.resultNum; // eslint-disable-line
     } catch (error) {
       console.error('计算出错, 做清空处理:', error);
       valueText = '0';
@@ -194,6 +195,7 @@ export default class Calculator extends Component {
         }
         if (data.value === '√') {
           const result = Math.sqrt(Number(oldvalue)) + ''; // eslint-disable-line
+          this.props.transferResult(prevresult); // 向外分发action
           return { valueText: result, resultNum: result };
         }
         return { valueText: oldvalue + data.value, resultNum: oldvalue };
@@ -242,7 +244,6 @@ export default class Calculator extends Component {
   // 渲染
   render() {
     const { resultNum, mrNum, bracketsLeft } = this.state;
-    console.log('bracketsLeft:', bracketsLeft);
     // 初始化DOM值
     return (
       <Drag className={styles.conatiner}>

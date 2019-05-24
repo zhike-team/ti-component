@@ -71,6 +71,7 @@ export default class Calculator extends Component {
       resultNum: 0,
       mrNum: '', // 存储的数值
       currentKey: '',
+      bracketsLeft: false,
     });
   }
   // 收到最新props结果即更新相应state状态
@@ -86,7 +87,7 @@ export default class Calculator extends Component {
     this.state.historyArr.push({ time, value: toShowdata });
   }
   // 生成按钮列表
-  initButtonList= (value, bracketsLeft) =>
+  initButtonList= value =>
     value.map(data => (
       <button
         id={data.value}
@@ -94,9 +95,9 @@ export default class Calculator extends Component {
         style={
           data.type === 'brackets' ? {
             backgroundImage: `url(${
-              (bracketsLeft && data.value === ')') || (!bracketsLeft && data.value === '(') ?
-              require('./assets/blue1.png') :
-              require('./assets/blue3.png')
+              (data.value === ')') ?
+              require('./assets/blue3.png') :
+              require('./assets/blue1.png')
             })`,
             backgroundSize: '100%',
             color: `${data.type === 'number' ? '#000' : '#fff'}`,
@@ -117,19 +118,35 @@ export default class Calculator extends Component {
 
   // 监听所有按钮的click事件
   handleValueInput(data) {
-    const bracketsLeft = this.state.valueText.split('(').length > this.state.valueText.split(')').length;
-    if ((!bracketsLeft && data.value === ')') || (bracketsLeft && data.value === '(')) return false;
+    const { bracketsLeft } = this.state;
+    if ((bracketsLeft && data.value === '(') || (!bracketsLeft && data.value === ')')) return false;
     const button = global.document.getElementById(data.value);
     const image = button.style.backgroundImage;
-    button.style.backgroundImage = '';
-    button.style.backgroundColor = '#234761';
-    button.style.transition = 'all 300ms linear 30ms';
-    setTimeout(() => {
-      button.style.backgroundImage = image;
-    }, 120);
+    /* eslint-disable */
+    if (data.type === 'brackets') {
+      const button1 = global.document.getElementById( data.value === '(' ? ')' : '(');
+      button1.style.backgroundImage = `url(${require('./assets/blue1.png')})`;
+      button.style.backgroundImage = `url(${require('./assets/blue3.png')})`;
+      this.setState({ bracketsLeft: !bracketsLeft });
+    } else {
+      button.style.backgroundImage = '';
+      button.style.backgroundColor = '#234761';
+      button.style.transition = 'all 300ms linear 30ms';
+      setTimeout(() => {
+        button.style.backgroundImage = image;
+      }, 120);
+    }
     const oldState = this.state.valueText;
-    const { valueText, resultNum } = this.checkClickType(oldState, data);
-    this.setState({ valueText, resultNum: resultNum.slice(0, 16), currentKey: data.value });
+    let valueText, resultNum;
+    try {
+      valueText = this.checkClickType(oldState, data).valueText; // eslint-disable-line
+      resultNum = this.checkClickType(oldState, data).resultNum; // eslint-disable-line
+    } catch (error) {
+      console.error('计算出错, 做清空处理:', error);
+      valueText = '0';
+      resultNum = '0';
+    }
+    this.setState({ valueText, resultNum: resultNum.slice(0, 16), currentKey: data.value});
   }
   // 根据按钮自带的type属性来做不同的反应
   checkClickType(oldvalue, data) {
@@ -145,9 +162,8 @@ export default class Calculator extends Component {
         } else if (data.value === 'M+') {
           this.setState({ mrNum: resultNum });
         }
-        return { valueText: oldvalue, resultNum };
+        return { valueText: oldvalue, resultNum: resultNum || '0' };
       case 'equal':
-        // const resultbefore = `${oldvalue}  =`;
         const prevresult = getAllValue(oldvalue);// 预处理特殊操作符
         this.props.transferResult(prevresult); // 向外分发action
         this.setState({ equalFlag: true });
@@ -225,8 +241,8 @@ export default class Calculator extends Component {
 
   // 渲染
   render() {
-    const { resultNum, valueText, mrNum } = this.state;
-    const bracketsLeft = valueText.split('(').length > valueText.split(')').length;
+    const { resultNum, mrNum, bracketsLeft } = this.state;
+    console.log('bracketsLeft:', bracketsLeft);
     // 初始化DOM值
     return (
       <Drag className={styles.conatiner}>
@@ -242,7 +258,7 @@ export default class Calculator extends Component {
         <div
           className={css(styles.div_class_buttonlist)}
         >
-          {this.initButtonList(KEYVALUE, bracketsLeft)}
+          {this.initButtonList(KEYVALUE)}
         </div>
         <View className={styles.transfer}>Transfer Display</View>
       </Drag>

@@ -26,6 +26,7 @@ storiesOf('Calculator GRE考试计算器', module)
   )
   .add('transferResult',() =>
 			(<Calculator
+        destroy={() => {}}
         transferResult={ data => {
           alert(`我拿到了计算结果为:${data}`)
           }
@@ -45,6 +46,7 @@ storiesOf('Calculator GRE考试计算器', module)
     .add('transferVisible',() =>
     (<Calculator
       transferVisible={true}
+      destroy={() => {}}
       transferResult={ data => {
         alert(`我拿到了计算结果为:${data}`)
         }
@@ -54,6 +56,7 @@ storiesOf('Calculator GRE考试计算器', module)
       text: `是否可以点击 获取结果（默认是不可点击）  使用组件方法如下：
       <Calculator
       transferVisible={true}
+      destroy={() => {}}
       transferResult={ data => alert(
         '我拿到了计算结果～', data
       )}

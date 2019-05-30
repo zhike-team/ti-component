@@ -6,6 +6,12 @@ import Drag from '../drag';
 import getAllValue from './getAllValue';
 import styles from './styles';
 
+// imageStr 图片提前引入
+const imgBlue1 = require('./assets/blue1click.png');
+const imgBlue2 = require('./assets/blue2click.png');
+const imgOrange = require('./assets/orangeclick.png');
+const imgWrite = require('./assets/writeclick.png');
+
 // 标准 计算器
 const KEYVALUE = [
   { value: 'MR', type: 'member' },
@@ -97,8 +103,8 @@ export default class Calculator extends Component {
           data.type === 'brackets' ? {
             backgroundImage: `url(${
               (data.value === ')') ?
-              require('./assets/blue2.png') :
-              require('./assets/blue1.png')
+              require('./assets/blue3.png') :
+              require('./assets/blue2.png')
             })`,
             backgroundSize: '100%',
             color: `${data.type === 'number' ? '#000' : '#fff'}`,
@@ -123,6 +129,7 @@ export default class Calculator extends Component {
     if ((bracketsLeft && data.value === '(') || (!bracketsLeft && data.value === ')')) return false;
     const button = global.document.getElementById(data.value);
     this.image = button.style.backgroundImage;
+    this.imageStr = this.image.split('.')[0].split('/');
     /* eslint-disable */
     if (data.type === 'brackets') {
       const button1 = global.document.getElementById( data.value === '(' ? ')' : '(');
@@ -130,8 +137,24 @@ export default class Calculator extends Component {
       button.style.backgroundImage = `url(${require('./assets/blue3.png')})`;
       this.setState({ bracketsLeft: !bracketsLeft });
     } else {
-      button.style.backgroundImage = '';
-      button.style.backgroundColor = '#234761';
+      let imageStr;
+      const buttonStyle = this.imageStr[this.imageStr.length - 1];
+      switch(buttonStyle) {
+        case 'blue1':
+          imageStr = imgBlue1;
+          break;
+        case 'blue2':
+          imageStr = imgBlue2;
+          break;
+        case 'orange':
+          imageStr = imgOrange;
+          break;
+        default:
+          imageStr = imgWrite;
+          break; 
+      }
+      console.log('sss:', imageStr);
+      button.style.backgroundImage = `url(${imageStr})`;
       button.style.transition = 'all 300ms linear 30ms';
       setTimeout(() => {
         button.style.backgroundImage = this.image;
@@ -171,10 +194,21 @@ export default class Calculator extends Component {
         return { valueText: '' + prevresult, resultNum: '' + prevresult }; // eslint-disable-line
       case 'back':
         const text = oldvalue.substring(0, oldvalue.length - 1) || '0'; // 删除最后一位
-        return { valueText: text, resultNum: text };
+        return { valueText: text, resultNum: resultNum.substring(0, oldvalue.length - 1) || '0' };
       case 'clear':
         return { valueText: '0', resultNum: '0' };
       case 'operator': // 操作符
+        if (data.value === '±') {
+          const valueArr2 = oldvalue.split(' ');
+          const value2 = valueArr2 && valueArr2[valueArr2.length - 2];
+          if (valueArr2.length > 1 && isNaN(value2)) {
+            const value3 = oldvalue && oldvalue.slice(0, valueArr2.lastIndexOf(' '));
+            const value4 =  valueArr2 && valueArr2[valueArr2.length - 1];
+            return { valueText: `${value3}-${value4}`, resultNum: `-${resultNum}`}
+          } else {
+            return { valueText: `-${resultNum}`, resultNum: `-${resultNum}`}
+          }
+        }
         if (calAfterFlag) { // 如果计算后
           this.setState({ equalFlag: false });
         }

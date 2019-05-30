@@ -42,7 +42,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     width: 208,
     height: 40,
-    color: '#fff',
+    color: '#D5DADE',
     marginTop: '1px',
   },
   div_class_button: {
@@ -75,8 +75,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     width: 208,
     height: 40,
-    color: '#000',
+    color: '#D5DADE',
     marginTop: '1px',
-    backgroundColor: '#c3ccd1',
+    backgroundImage: `url(${require('./assets/noclick.png')})`,
+    backgroundSize: '100%',
   },
 });

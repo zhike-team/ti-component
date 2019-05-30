@@ -39,7 +39,7 @@
     "@storybook/theming": "5.0.9",
     "@zhike/ti-ui": "1.2.7",
     "aphrodite": "^1.2.5",
-    "axios": "^0.16.2",
+    "axios": "^0.18.0",
     "babel-cli": "^6.0.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "8.2.3",

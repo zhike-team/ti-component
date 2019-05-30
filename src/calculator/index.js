@@ -153,7 +153,6 @@ export default class Calculator extends Component {
           imageStr = imgWrite;
           break; 
       }
-      console.log('sss:', imageStr);
       button.style.backgroundImage = `url(${imageStr})`;
       button.style.transition = 'all 300ms linear 30ms';
       setTimeout(() => {

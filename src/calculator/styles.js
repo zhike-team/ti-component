@@ -44,6 +44,7 @@ export default StyleSheet.create({
     height: 40,
     color: '#D5DADE',
     marginTop: '1px',
+    cursor: 'pointer',
   },
   div_class_button: {
     display: 'inline-block',

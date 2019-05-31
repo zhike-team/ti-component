@@ -157,7 +157,7 @@ export default class Calculator extends Component {
       button.style.transition = 'all 300ms linear 30ms';
       setTimeout(() => {
         button.style.backgroundImage = this.image;
-      }, 150);
+      }, 100);
     }
     const oldState = this.state.valueText;
     let valueText, resultNum;

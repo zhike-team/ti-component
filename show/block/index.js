@@ -112,7 +112,8 @@ export default class Block extends Component {
         // 提取当前标记前的文字
         if (markup.index !== start) {
           if (p.text.substring(start, markup.index) !== '') {
-            spans.push(p.text.substring(start, markup.index));
+            const text = p.text.substring(start, markup.index);
+            spans.push(this.handleCenter(text));
           }
           start = markup.index;
         }
@@ -135,7 +136,7 @@ export default class Block extends Component {
               <span
                 key={`${start}-insert`}
               >
-                {markupText}
+                {this.handleCenter(markupText)}
                 &nbsp;
               </span>,
             );
@@ -171,7 +172,7 @@ export default class Block extends Component {
                 key={`${start}-insert`}
               >
                 &nbsp;
-                {markupText}
+                {this.handleCenter(markupText)}
               </span>,
             );
           }
@@ -183,7 +184,7 @@ export default class Block extends Component {
           }
           spans.push(
             <span key={start} >
-              {markupText}
+              {this.handleCenter(markupText)}
               <Input
                 readOnly={isReport}
                 className={styles[`${markup.value}Line`]}
@@ -213,7 +214,7 @@ export default class Block extends Component {
               key={start}
               className={css(styles.ieltsBlank)}
             >
-              {markupText}
+              {this.handleCenter(markupText)}
               <input
                 ref={get(materialIds, `${markup.answerIndex}`) && get(materialIds, `${markup.answerIndex}`).toString()}
                 readOnly={isReport}
@@ -259,14 +260,14 @@ export default class Block extends Component {
           if (markup.value === 'right') {
             spans.push(
               <span key={`${start}`}>
-                {markupText}<span className={css(styles.blockArrowBlank)} />
+                {this.handleCenter(markupText)}<span className={css(styles.blockArrowBlank)} />
               </span>,
             );
           } else if (markup.value === 'left') {
             spans.push(
               <span key={`${start}`} >
                 <span className={css(styles.blockArrowBlank)} />
-                {markupText}
+                {this.handleCenter(markupText)}
               </span>,
             );
           }
@@ -280,7 +281,7 @@ export default class Block extends Component {
                   : styles[`inline${markup.type}${markup.value ? capitalize(markup.value) : ''}`],
               )}
             >
-              {markupText}
+              {this.handleCenter(markupText)}
             </span>,
           );
         }
@@ -290,7 +291,7 @@ export default class Block extends Component {
       // 提取最后一个标记后的文字
       if (!inlineMarkups.length) {
         if (p.text.substr(start) !== '') {
-          spans.push(p.text.substr(start));
+          spans.push(this.handleCenter(p.text.substr(start)));
         }
       }
       return <p className={css(styles.block)}>{spans} </p>;
@@ -329,6 +330,22 @@ export default class Block extends Component {
       });
     }
   }
+  // 处理段落换行的问题
+  handleCenter = text => {
+    if (text.indexOf('↵') === -1) return text;
+    const spans = text.split('↵');
+    return spans.map((span, index) => (
+      <p
+      className={css(styles.center)}
+      >
+        {span}
+        {
+          index !== spans.length - 1 &&
+            <span>&#10;</span> // eslint-disable-line
+        }
+      </p>
+    ));
+  }
 
 
   // 渲染
@@ -340,7 +357,6 @@ export default class Block extends Component {
         this.anchor = node;
       };
     }
-    console.log('sss:', this.props);
     return (
       <View
         className={[styles.paragraph, paragraphClassName,

@@ -274,3 +274,71 @@ storiesOf('Audio', module)
     TableComponent,
     }
   })
+  .add('test',
+	() => (
+    <div style={{ width: '500px', height: '100px' }} >
+        <Audio
+          src={'/atheneBackend/1539170674668uukska.mp3'}
+          cdnUrl={'https://media8.smartstudy.com/'}
+          text={{
+            inlineMarkup: [
+              {pid: "9c7ff09a-5980-5088-83d5-a8b55af45573", type: "Underline", index: 8, length: 3},
+              {pid: "9c7ff09a-5980-5088-83d5-a8b55af45573", type: "Underline", index: 0, length: 4}
+            ],
+            paragraphs: [
+              {id: "9c7ff09a-5980-5088-83d5-a8b55af45573", text: "正在测试↵换行测试↵如果不行，还是需要换行", type: "Text"}
+            ],
+          }}
+          materialType="listenTranslation"
+        ></Audio>
+    </div>
+  ), {
+    info: {
+      text: `
+      test 测试富文本存在的问题 使用组件方法如下：
+      ~~~js
+        <Audio
+          src={'/atheneBackend/1539170674668uukska.mp3'}
+          cdnUrl={'https://media8.smartstudy.com/'}
+          text={material1}
+          materialType="listenTranslation"
+          ></Audio>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })
+  .add('test',
+	() => (
+    <div style={{ width: '500px', height: '100px' }} >
+        <Audio
+          src={'/atheneBackend/1539170674668uukska.mp3'}
+          cdnUrl={'https://media8.smartstudy.com/'}
+          text={{
+            inlineMarkup: [
+              {pid: "9c7ff09a-5980-5088-83d5-a8b55af45573", type: "Underline", index: 8, length: 3},
+              {pid: "9c7ff09a-5980-5088-83d5-a8b55af45573", type: "Underline", index: 0, length: 4}
+            ],
+            paragraphs: [
+              {id: "9c7ff09a-5980-5088-83d5-a8b55af45573", text: "正在测试↵换行测试↵如果不行，还是需要换行", type: "Text"}
+            ],
+          }}
+          materialType="listenTranslation"
+        ></Audio>
+    </div>
+  ), {
+    info: {
+      text: `
+      test 测试富文本存在的问题 使用组件方法如下：
+      ~~~js
+        <Audio
+          src={'/atheneBackend/1539170674668uukska.mp3'}
+          cdnUrl={'https://media8.smartstudy.com/'}
+          text={material1}
+          materialType="listenTranslation"
+          ></Audio>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })

@@ -95,7 +95,8 @@ class Block extends Component {
         // 提取当前标记前的文字
         if (markup.index !== start) {
           if (p.text.substring(start, markup.index) !== '') {
-            spans.push(p.text.substring(start, markup.index));
+            const markupText = p.text.substring(start, markup.index);
+            spans.push(this.handleCenter(markupText));
           }
           start = markup.index;
         }
@@ -118,7 +119,7 @@ class Block extends Component {
               <span
                 key={`${start}-insert`}
               >
-                {markupText}
+                {this.handleCenter(markupText)}
                 &nbsp;
               </span>,
             );
@@ -154,7 +155,7 @@ class Block extends Component {
                 key={`${start}-insert`}
               >
                 &nbsp;
-                {markupText}
+                {this.handleCenter(markupText)}
               </span>,
             );
           }
@@ -166,7 +167,7 @@ class Block extends Component {
           }
           spans.push(
             <span key={start} >
-              {markupText}
+              {this.handleCenter(markupText)}
               <Input
                 readOnly={isReport}
                 className={styles[`${markup.value}Line`]}
@@ -196,7 +197,7 @@ class Block extends Component {
               key={start}
               className={css(styles.ieltsBlank)}
             >
-              {markupText}
+              {this.handleCenter(markupText)}
               <input
                 ref={get(materialIds, `${markup.answerIndex}`) && get(materialIds, `${markup.answerIndex}`).toString()}
                 readOnly={isReport}
@@ -242,14 +243,14 @@ class Block extends Component {
           if (markup.value === 'right') {
             spans.push(
               <span key={`${start}`}>
-                {markupText}<span className={css(styles.blockArrowBlank)} />
+                {this.handleCenter(markupText)}<span className={css(styles.blockArrowBlank)} />
               </span>,
             );
           } else if (markup.value === 'left') {
             spans.push(
               <span key={`${start}`} >
                 <span className={css(styles.blockArrowBlank)} />
-                {markupText}
+                {this.handleCenter(markupText)}
               </span>,
             );
           }
@@ -263,7 +264,7 @@ class Block extends Component {
                   : styles[`inline${markup.type}${markup.value ? capitalize(markup.value) : ''}`],
               )}
             >
-              {markupText}
+              {this.handleCenter(markupText)}
             </span>,
           );
         }
@@ -273,7 +274,7 @@ class Block extends Component {
       // 提取最后一个标记后的文字
       if (!inlineMarkups.length) {
         if (p.text.substr(start) !== '') {
-          spans.push(p.text.substr(start));
+          spans.push(this.handleCenter(p.text.substr(start)));
         }
       }
       return <p className={css(styles.block)}>{spans} </p>;
@@ -311,6 +312,23 @@ class Block extends Component {
         return false;
       });
     }
+  }
+  // 处理段落换行的问题
+  handleCenter = text => {
+    if (text.indexOf('\n') === -1) return text;
+    const spans = text.split('\n');
+    console.log('spans', spans, spans.length - 1);
+    return spans.map((span, index) => (
+      <p
+      className={css(styles.center)}
+      >
+        {span}&#10;
+        {
+          index !== spans.length - 1 &&
+            <span>&#10;</span> // eslint-disable-line
+        }
+      </p>
+    ));
   }
 
 

@@ -247,4 +247,8 @@ export default StyleSheet.create({
     verticalAlign: 'middle',
     margin: '0px -16px 0px -16px',
   },
+  center: {
+    lineHeight: '24px',
+    margin: '0px 0px 0px 0px',
+  },
 });

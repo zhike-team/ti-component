@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { View, Input, Image } from '@zhike/ti-ui';
 import { css } from 'aphrodite';
+import uuid from 'uuid';
 import { get, sortBy, capitalize } from 'lodash';
 import Audio from '../audio';
 import { firstUpperCase } from './utils';
@@ -301,7 +302,7 @@ export default class Block extends Component {
     // if (regex.test(p.text)) {
     //   return false;
     // }
-    return <p className={css(styles.block)}>{p.text}</p>;
+    return <p className={css(styles.block)}>{this.handleCenter(p.text)}</p>;
   }
 
   // 处理段落样式（图片Image && 音频 Audio）
@@ -336,6 +337,7 @@ export default class Block extends Component {
     const spans = text.split('↵');
     return spans.map((span, index) => (
       <p
+      key={uuid.v1()}
       className={css(styles.center)}
       >
         {span}

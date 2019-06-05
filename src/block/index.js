@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import uuid from 'uuid';
 import { withRouter } from 'react-router';
 import { View, Input, Image } from '@zhike/ti-ui';
 import { css } from 'aphrodite';
@@ -284,7 +285,7 @@ class Block extends Component {
     // if (regex.test(p.text)) {
     //   return false;
     // }
-    return <p className={css(styles.block)}>{p.text}</p>;
+    return <p className={css(styles.block)}>{this.handleCenter(p.text)}</p>;
   }
 
   // 处理段落样式（图片Image && 音频 Audio）
@@ -317,9 +318,9 @@ class Block extends Component {
   handleCenter = text => {
     if (text.indexOf('\n') === -1) return text;
     const spans = text.split('\n');
-    console.log('spans', spans, spans.length - 1);
     return spans.map((span, index) => (
       <p
+      key={uuid.v1()}
       className={css(styles.center)}
       >
         {span}&#10;

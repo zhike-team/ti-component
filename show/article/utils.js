@@ -6,7 +6,6 @@ const groupMarkupsByPId = source => {
   (source || []).forEach(item => {
     (mappings[item.pid] || (mappings[item.pid] = [])).push(item);
   });
-  console.log('source:', source, mappings);
 
   return mapValues(mappings, arr => sortBy(arr, 'index'));
 };

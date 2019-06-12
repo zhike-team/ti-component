@@ -21,6 +21,7 @@ export default class Article extends Component {
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
     paragraphClassName: undefined,
+    pStyle: undefined,
     isIelts: false,
     location: undefined,
     imgWidth: 0,
@@ -53,6 +54,8 @@ export default class Article extends Component {
     answerRsult: PropTypes.array,
     /**  外部传进来的段落样式 */
     paragraphClassName: PropTypes.object,
+    /** 专门用来设置段落间距 */
+    pStyle: PropTypes.object,
     /**  是否是雅思题库 */
     isIelts: PropTypes.bool,
     /**  图片宽度 */
@@ -84,7 +87,7 @@ export default class Article extends Component {
   render() {
     const { material, question, isTextOnly, handleAnswer,
       answer, isReport, externalInitAnswer, qNum, materialIds,
-      answerRsult, isIelts, paragraphClassName, imgWidth,
+      answerRsult, isIelts, paragraphClassName, imgWidth, pStyle,
     } = this.props;
     const article = normalizeArticle(
       material,
@@ -138,6 +141,7 @@ export default class Article extends Component {
                 answerRsult={answerRsult}
                 isIelts={isIelts}
                 paragraphClassName={paragraphClassName}
+                pStyle={pStyle}
                 imgWidth={imgWidth}
               />
             );

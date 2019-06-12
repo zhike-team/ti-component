@@ -128,5 +128,22 @@ storiesOf('Block', module)
     TableComponent,
     }
   })
+  .add('设置段落样式 pStyle',
+  () => (
+      <div style={styles.container}>
+        <Block p={p} isReport={true} pStyle={styles.pStyle}></Block>
+      </div>
+  ),
+  {
+    info: {
+      text:   `
+      段落解析组件 支持设置图片宽度 imgWidth 传数字类型 使用组件方法如下：
+      ~~~js
+        <Block p={p} isReport={true} pStyle={styles.pStyle}></Block>
+      ~~~
+    `,
+    TableComponent,
+    }
+  })
 //  //  answer, location, handleAnswer, insertSentence, hasAction, isPositionTip, paragraphClassName
 //  // qNum, externalInitAnswer, handleQuestionSelect, materialIds, answerRsult, isReport, isIelts

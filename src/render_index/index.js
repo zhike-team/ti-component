@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { history } from 'routers';
+import { filter, get } from 'lodash';
 import { View, Image } from '@zhike/ti-ui';
+import { history } from 'routers';
+import { css } from 'aphrodite';
 import styles from './styles';
 
 
@@ -17,33 +19,29 @@ export default class RenderIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShowArrows: false, // 是否显示左右箭头
+      isShowArrows: false, // 是否显示折叠按钮
       questionArray: [], // 将题目分组存放
-      currentPage: 1, // 当前页面索引
-      countPages: 1, // 所有页面数
+      isFolding: true, // 是否折叠
     };
   }
 
   componentWillMount() {
-    // 每次刷新， 需要重新保存一下当前页面
     const { questions } = this.props;
     let { questionId } = this.props.params;
     if (questions && !questionId) {
       questionId = questions[0].id;
     }
-    const question = questions && questions.filter(item => item.id === parseInt(questionId, 10))[0];
-    const currentPage = question && Math.ceil(question.rank / 13);
     const count = questions.length;
     const questionArray = [];
-    // 当 题目数量超过14个时，两侧按钮显示，
+    // 当 题目数量超过14个时，右侧折叠按钮显示，
     if (count > 14) {
-      // 将题目进行分组，分多页显示
+      // 将题目进行分组，分多行显示
       const countPages = Math.ceil(count / 13);
       for (let i = 1; i <= countPages; ++i) {  // eslint-disable-line
         const item = questions.slice((i - 1) * 13, i * 13);
         questionArray.push(item);
       }
-      this.setState({ questionArray, countPages, currentPage });
+      this.setState({ questionArray });
       const isShowArrows = true;
       this.setState({ isShowArrows });
       return false;
@@ -54,89 +52,73 @@ export default class RenderIndex extends Component {
   }
 
   // 生成题目索引 的函数
-  renderIndex = page => {
-    const { params, questions } = this.props;
+  renderIndex = isFolding => {
     const { questionArray } = this.state;
+    if (isFolding) {
+      return questionArray[0] && questionArray[0].map(this.renderButton);
+    } else {
+      return questionArray && questionArray.map(item => item.map(this.renderButton));
+    }
+  }
+  // 渲染题号
+  renderButton = (item, index) => {
+    const { params, questions } = this.props;
     const { exerciseId, mode } = params;
     let { questionId } = params;
-    if (!questionId) questionId = questions[0].id;
     const search = global.location.search; // eslint-disable-line
-    return questionArray && questionArray[page].map((item, index) => {
-      const className = [styles.num];
-      if (['Blank', 'ChooseMany', 'ChooseOne', 'SortPointSelect', 'PointSelect', 'Sort'].indexOf(item.type) !== -1) {
-        const isCorrect =
-          item.materials[0].userAnswer ? item.materials[0].userAnswer.correct : null;
-        if (parseInt(questionId, 10) === item.id && !isCorrect) {
-          className.push(styles.numRedActive);
-        } else if (parseInt(questionId, 10) === item.id && isCorrect) {
-          className.push(styles.numGreenActive);
-        } else if (parseInt(questionId, 10) !== item.id && !isCorrect) {
-          className.push(styles.numRed);
-        } else if (parseInt(questionId, 10) !== item.id && isCorrect) {
-          className.push(styles.numGreen);
-        }
-      } else if (parseInt(questionId, 10) === item.id) {
-      // 判断主观题 item.type === 'SubjectBlank' 'FollowUp'
-        className.push(styles.numBlackActive);
-      } else {
-        className.push(styles.numBlack);
+    if (!questionId) questionId = questions[0].id;
+    const className = [styles.num];
+    const isCorrect =
+    item.materials[0].userAnswer ? item.materials[0].userAnswer.correct : null;
+    if (['Blank', 'ChooseMany', 'ChooseOne', 'SortPointSelect', 'PointSelect', 'Sort'].indexOf(item.type) !== -1) {
+      if (parseInt(questionId, 10) === item.id && !isCorrect) {
+        className.push(styles.numRedActive);
+      } else if (parseInt(questionId, 10) === item.id && isCorrect) {
+        className.push(styles.numGreenActive);
+      } else if (parseInt(questionId, 10) !== item.id && !isCorrect) {
+        className.push(styles.numRed);
+      } else if (parseInt(questionId, 10) !== item.id && isCorrect) {
+        className.push(styles.numGreen);
       }
-      return (
-        <View
-          key={index}
-          className={className}
-          onClick={() => history.push(`/report/${mode}/${exerciseId}/${item.id}${search}`)}
-        >
-          {parseInt(questionId, 10) === item.id && <View className={styles.triangle} />}
-          {item.rank}
-        </View>);
-    });
+    } else if (parseInt(questionId, 10) === item.id) {
+    // 判断主观题 item.type === 'SubjectBlank' 'FollowUp'
+      className.push(styles.numBlackActive);
+    } else {
+      className.push(styles.numBlack);
+    }
+    return (
+      <View
+        key={index}
+        className={className}
+        onClick={() => history.push(`/report/${mode}/${exerciseId}/${item.id}${search}`)}
+      >
+        {item.rank}
+      </View>);
   }
   render() {
-    const { isShowArrows, currentPage, countPages } = this.state;
-    const { questions, params } = this.props;
-    const { exerciseId, mode } = params;
-    const search = global.location.search; // eslint-disable-line
+    const { questions } = this.props;
+    const { isShowArrows, isFolding } = this.state;
     return (
-      <View>
+      <View style={{ width: 510, borderBottom: 'solid 1px #c3ccd1', paddingBottom: '20px' }}>
         <View className={styles.indexBox}>
           <View className={styles.left}>
-            {
-              isShowArrows &&
-              <View
-                className={[styles.num, currentPage === 1 ? styles.disabled : styles.button]}
-                onClick={() => {
-                  if (currentPage === 1) { return false; }
-                  let currentPage1 = currentPage - 1; // eslint-disable-line
-                  this.setState({ currentPage: currentPage1 });
-                  // 当前页面的第一题
-                  const index = (currentPage1 - 1) * 13;
-                  const item = questions[index];
-                  history.push(`/report/${mode}/${exerciseId}/${item.id}${search}`);
-                }}
-              >
-                <Image src={require('./assets/arrows_left@2x.png')} className={styles.image} />
-              </View>
-            }
-            {this.renderIndex(currentPage - 1)}
+            {this.renderIndex(isFolding)}
           </View>
           {
             isShowArrows &&
               <View
-                className={[styles.num, styles.right, currentPage === countPages ? styles.disabled : styles.button]}
+                className={[styles.num, styles.right, styles.button]}
                 onClick={() => {
-                  if (currentPage === countPages) { return false; }
-                  let currentPage2 = currentPage + 1; // eslint-disable-line
-                  this.setState({ currentPage: currentPage2 });
-                  // 当前页面的第一题
-                  const index = (currentPage2 - 1) * 13;
-                  const item = questions[index];
-                  history.push(`/report/${mode}/${exerciseId}/${item.id}${search}`);
+                  this.setState({ isFolding: !isFolding });
                 }}
               >
-                <Image src={require('./assets/arrows_right@2x.png')} className={styles.image} />
+                <Image src={isFolding ? require('./assets/arrows.png') : require('./assets/arrows_top.png')} className={styles.image} />
               </View>
           }
+        </View>
+        <View className={styles.answer}>
+          答对：<span className={css(styles.correct)}>&nbsp;{filter(questions, question => get(question, 'materials.0.userAnswer.correct')).length}</span>
+          答错：<span className={css(styles.error)}>&nbsp;{filter(questions, question => !get(question, 'materials.0.userAnswer.correct')).length}</span>
         </View>
       </View>
     );

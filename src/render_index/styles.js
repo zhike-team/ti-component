@@ -2,34 +2,23 @@ import { StyleSheet } from 'aphrodite';
 
 export default StyleSheet.create({
   indexBox: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: 510,
-    borderBottom: 'solid 1px #c3ccd1',
+    flexWrap: 'wrap',
   },
   num: {
     position: 'relative',
     marginLeft: 8,
     marginBottom: 15,
     width: 28,
-    height: 28,
+    minHeight: 28,
     lineHeight: '28px',
     borderRadius: '3px',
     border: 'solid 1px #878f98',
     color: '#49cf51',
     textAlign: 'center',
     cursor: 'pointer',
-  },
-  triangle: {
-    position: 'absolute',
-    width: 10,
-    height: 6,
-    top: 37,
-    left: 8,
-    backgroundImage: `url(${require('./assets/top.png')})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100%',
   },
   numGreen: {
     color: '#49cf51',
@@ -73,27 +62,39 @@ export default StyleSheet.create({
   },
   image: {
     width: 12,
-    height: 12,
+    ':hover': {
+      transform: 'rotateX(360deg)',
+    },
   },
   button: {
+    alignSelf: 'start',
     justifyContent: 'center',
     alignItems: 'center',
     ':hover': {
       backgroundColor: '#F6F8F9',
     },
   },
-  disabled: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(50,54,58,0.3)',
-    ':hover': {
-      backgroundColor: 'rgba(50,54,58,0.3)',
-    },
-  },
   left: {
+    flex: 1,
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   right: {
     marginRight: 6,
+  },
+  answer: {
+    display: 'inline-block',
+    color: 'rgba(50,54,58,1)',
+    lineheight: '17px',
+    fontFamily: 'PingFangSC-Regular',
+    fontWeight: 400,
+    paddingLeft: '8px',
+  },
+  correct: {
+    color: 'rgba(73,207,81,1)',
+    marginRight: '20px',
+  },
+  error: {
+    color: 'rgba(240,65,52,1)',
   },
 });

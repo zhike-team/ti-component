@@ -583,3 +583,22 @@ const CenterDecorator = (storyFn) => (
     TableComponent,
     }
   })
+  .add('设置段落样式 pStyle',
+  () => (
+      <div style={styles.container}>
+        <Article
+        paragraphClassName={styles.tipTop}
+        material={{paragraphs: [{ id: "f2776cd4-01e6-9d42-9dd4-2d83bdea9eee",
+          text: "指导语～～",type: "Text"}]}} pStyle={styles.pStyle}></Article>
+      </div>
+  ), {
+    info: {
+      text: `
+      雅思 填空题，使用组件方法如下：
+      ~~~js
+        <Article material={material1} question={question1} pStyle={styles.pStyle}></Article>
+      ~~~
+    `,
+      TableComponent,
+    }
+  })

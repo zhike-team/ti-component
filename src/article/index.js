@@ -21,6 +21,7 @@ class Article extends Component {
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
     paragraphClassName: undefined,
+    pStyle: undefined, // 富文本的段落样式
     isIelts: false,
     imgWidth: 0,
   };
@@ -39,6 +40,7 @@ class Article extends Component {
     materialIds: PropTypes.array,
     answerRsult: PropTypes.array,
     paragraphClassName: PropTypes.object,
+    pStyle: PropTypes.object,
     isIelts: PropTypes.bool,
     imgWidth: PropTypes.number,
   };
@@ -69,7 +71,7 @@ class Article extends Component {
     const { material, question, isTextOnly,
       answer, isReport, externalInitAnswer,
       qNum, materialIds, answerRsult, isIelts,
-      paragraphClassName, imgWidth,
+      paragraphClassName, imgWidth, pStyle,
     } = this.props;
     const article = normalizeArticle(
       material,
@@ -121,6 +123,7 @@ class Article extends Component {
                 answerRsult={answerRsult}
                 isIelts={isIelts}
                 paragraphClassName={paragraphClassName}
+                pStyle={pStyle}
                 imgWidth={imgWidth}
               />
             );

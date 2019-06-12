@@ -63,6 +63,7 @@ export default class Recorder extends Component {
         this.onError({ mode, skip, key: 1 });
         console.error('startRecording failure', error)
       })
+      console.log('this.recorder.recordRTC:', this.recorder.recordRTC);
     })
     .catch(err =>{
       console.log(err.name + ": " + err.message);

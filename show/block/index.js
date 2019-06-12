@@ -23,6 +23,7 @@ export default class Block extends Component {
     answerRsult: [], // 答案集合
     isReport: false,
     paragraphClassName: undefined,
+    pStyle: undefined,
     isIelts: false,
     location: undefined,
     imgWidth: 0,
@@ -56,6 +57,8 @@ export default class Block extends Component {
     isReport: PropTypes.bool,
     /**  外部传进来的段落样式 */
     paragraphClassName: PropTypes.object,
+    /** 专门用来设置段落间距 */
+    pStyle: PropTypes.object,
     /**  是否是雅思题库 */
     isIelts: PropTypes.bool,
     /**  图片宽度 */
@@ -293,14 +296,14 @@ export default class Block extends Component {
           spans.push(p.text.substr(start));
         }
       }
-      return <p className={css(styles.block)}>{spans} </p>;
+      return <p className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)}>{spans} </p>;
     }
     // 行内样式中如果插入空格，回车的处理情况
     // const regex = /^(\s)*$/g;
     // if (regex.test(p.text)) {
     //   return false;
     // }
-    return <p className={css(styles.block)}>{p.text}</p>;
+    return <p className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)}>{p.text}</p>;
   }
 
   // 处理段落样式（图片Image && 音频 Audio）
@@ -311,13 +314,13 @@ export default class Block extends Component {
         const type = firstUpperCase(item.type);
         if (type === 'Audio') {
           return (
-            <div key={index} className={css(styles.block)}>
+            <div key={index} className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)}>
               <Audio src={item.uploadPath} />
             </div>
           );
         } else if (type === 'Image') {
           return (
-            <div key={index} className={css(styles.block)} style={{ textAlign: 'center' }}>
+            <div key={index} className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)} style={{ textAlign: 'center' }}>
               <Image
                 src={item.uploadPath}
                 style={this.props.imgWidth ? { width: `${this.props.imgWidth}px` } : { width: '100%' }}

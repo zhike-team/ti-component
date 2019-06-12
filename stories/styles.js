@@ -102,4 +102,21 @@ export default StyleSheet.create({
     },
     borderBottom: '1px solid #ebedf0',
   },
+  pStyle: {
+    marginTop: 0,
+    marginBottom: 0,
+  },
+  tipTop: {
+    width: '100%',
+    padding: '10px 20px',
+    fontSize: '16px',
+    fontFamily: 'PingFangSC-Regular',
+    fontWeight: 400,
+    color: 'rgba(50,54,58,1)',
+    lineHeight: '30px',
+    background: 'rgba(246,248,249,1)',
+    ':first-child': {
+      alignSelf: 'center',
+    },
+  },
 });

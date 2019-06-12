@@ -90,7 +90,6 @@ export default class RecorderDemo extends Component {
       }).catch(error => {
         this.upload({ error });
       });
-
       global.document.removeEventListener('visibilitychange', this.monitorPageLeave);
     });
   }

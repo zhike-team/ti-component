@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   num: {
     position: 'relative',
-    marginLeft: 8,
+    marginRight: 9,
     marginBottom: 15,
     width: 28,
     minHeight: 28,
@@ -19,6 +19,7 @@ export default StyleSheet.create({
     color: '#49cf51',
     textAlign: 'center',
     cursor: 'pointer',
+    fontSize: '14px',
   },
   numGreen: {
     color: '#49cf51',
@@ -80,7 +81,7 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
   },
   right: {
-    marginRight: 6,
+    marginRight: 0,
   },
   answer: {
     display: 'inline-block',
@@ -88,7 +89,8 @@ export default StyleSheet.create({
     lineheight: '17px',
     fontFamily: 'PingFangSC-Regular',
     fontWeight: 400,
-    paddingLeft: '8px',
+    paddingRight: '8px',
+    fontSize: '12px',
   },
   correct: {
     color: 'rgba(73,207,81,1)',

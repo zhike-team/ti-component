@@ -65,7 +65,7 @@ storiesOf('Block', module)
   .add('isTextOnly',
   () => (
       <div style={styles.container}>
-        <Block p={p1} isTextOnly={true}></Block>
+        <Block p={p1} isReport={true}></Block>
       </div>
   ), {
     info: {

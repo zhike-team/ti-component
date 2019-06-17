@@ -116,6 +116,7 @@ class Article extends Component {
                 p={p}
                 {...props}
                 answer={isReport ? get(question, 'materials.0.answer') : answer}
+                isReport={isReport}
                 initAnswer={externalInitAnswer === -1 ? (initAnswer - count) :
                   (externalInitAnswer + initAnswer - count)}
                 qNum={qNum}

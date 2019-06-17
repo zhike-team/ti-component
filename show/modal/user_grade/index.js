@@ -8,7 +8,7 @@ import axios from 'axios';
 import Modal from '../index';
 import styles from './styles';
 
-const history = require('history').createBrowserHistory;
+const history = require('history').createBrowserHistory();
 
 export default class ModalComponent extends Component {
   // 参数

@@ -305,11 +305,7 @@ export default class Block extends Component {
     // if (regex.test(p.text)) {
     //   return false;
     // }
-<<<<<<< HEAD
     return <p className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)}>{p.text}</p>;
-=======
-    return <p className={css(styles.block)}>{this.handleCenter(p.text)}</p>;
->>>>>>> dbf22e5fa55dea513c0eab583b8070df6db4ef1b
   }
 
   // 处理段落样式（图片Image && 音频 Audio）

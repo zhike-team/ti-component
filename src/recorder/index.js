@@ -46,7 +46,7 @@ export default class Recorder extends Component {
 
   // 开始录音
   static start({ mode, skip, callback = () => {} }) {
-    // this.destroy();
+    this.destroy();
     this.init();
     if (!navigator.mediaDevices.getUserMedia) { // eslint-disable-line
       return this.onError({ mode, skip });
@@ -101,7 +101,8 @@ export default class Recorder extends Component {
   static destroy() {
     if (this.recorder && this.recorder.recordRTC && this.recorder.recordRTC.destroy) {
       this.recorder.recordRTC.destroy();
-    }
+      this.recorder = null;
+    } 
   }
 
   // 错误监听

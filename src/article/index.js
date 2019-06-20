@@ -9,6 +9,7 @@ import styles from './styles';
 
 // TODO: 数据预处理在哪里做
 class Article extends Component {
+  // 参数
   static defaultProps = {
     isTextOnly: false,
     handleAnswer: () => {},
@@ -21,27 +22,44 @@ class Article extends Component {
     materialIds: [], // 雅思填空题 && 拖拽题  用来定位
     answerRsult: [], // 答案集合
     paragraphClassName: undefined,
-    pStyle: undefined, // 富文本的段落样式
+    pStyle: undefined,
     isIelts: false,
+    location: undefined,
     imgWidth: 0,
   };
 
   static propTypes = {
+    /**  富文本材料 */
     material: PropTypes.object.isRequired,
+    /**  包含有关当前 URL 的信息的对象 */
+    location: PropTypes.object,
+    /**  托福题库中用于获取题目答案及 material中的富文本样式 */
     question: PropTypes.object,
+    /**  是否只读 用于填空题及拖拽题的渲染 */
     isTextOnly: PropTypes.bool,
+    /**  用户作答之后的回调函数 */
     handleAnswer: PropTypes.func,
-    location: PropTypes.object.isRequired,
+    /**  用于报告页的答案显示 */
     answer: PropTypes.any,
+    /**  是否是报告页 */
     isReport: PropTypes.bool,
+    /**  需要显示的子题题号 */
     qNum: PropTypes.array,
+    /**  外部累计InsertBlank数量 */
     externalInitAnswer: PropTypes.number,
+    /**  处理子题选中 */
     handleQuestionSelect: PropTypes.func,
+    /**  雅思填空题 && 拖拽题  用来定位 */
     materialIds: PropTypes.array,
+    /**  答案集合 */
     answerRsult: PropTypes.array,
+    /**  外部传进来的段落样式 */
     paragraphClassName: PropTypes.object,
+    /** 专门用来设置段落间距 */
     pStyle: PropTypes.object,
+    /**  是否是雅思题库 */
     isIelts: PropTypes.bool,
+    /**  图片宽度 */
     imgWidth: PropTypes.number,
   };
 
@@ -68,10 +86,9 @@ class Article extends Component {
   }
 
   render() {
-    const { material, question, isTextOnly,
-      answer, isReport, externalInitAnswer,
-      qNum, materialIds, answerRsult, isIelts,
-      paragraphClassName, imgWidth, pStyle,
+    const { material, question, isTextOnly, handleAnswer,
+      answer, isReport, externalInitAnswer, qNum, materialIds,
+      answerRsult, isIelts, paragraphClassName, imgWidth, pStyle,
     } = this.props;
     const article = normalizeArticle(
       material,
@@ -115,6 +132,7 @@ class Article extends Component {
                 key={p.id}
                 p={p}
                 {...props}
+                handleAnswer={handleAnswer}
                 answer={isReport ? get(question, 'materials.0.answer') : answer}
                 isReport={isReport}
                 initAnswer={externalInitAnswer === -1 ? (initAnswer - count) :
@@ -136,4 +154,3 @@ class Article extends Component {
 }
 
 export default withRouter(Article);
-

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import uuid from 'uuid';
-import { withRouter } from 'react-router';
 import { View, Input, Image } from '@zhike/ti-ui';
 import { css } from 'aphrodite';
+import { withRouter } from 'react-router';
+import uuid from 'uuid';
 import { get, sortBy, capitalize } from 'lodash';
 import Audio from '../audio';
 import { firstUpperCase } from './utils';
@@ -25,27 +25,45 @@ class Block extends Component {
     answerRsult: [], // 答案集合
     isReport: false,
     paragraphClassName: undefined,
-    pStyle: undefined, // 富文本的段落样式
+    pStyle: undefined,
     isIelts: false,
+    location: undefined,
     imgWidth: 0,
   };
   static propTypes = {
+    /**  block组件处理的段落  */
     p: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
+    /**  包含有关当前 URL 的信息的对象 */
+    location: PropTypes.object,
+    /**  初始答案 */
     initAnswer: PropTypes.number,
+    /**  用户作答之后的回调函数 */
     handleAnswer: PropTypes.func,
+    /**  托福插入题 插入的句子 */
     insertSentence: PropTypes.string,
+    /**  是否有段落定位 */
     hasAction: PropTypes.bool,
+    /**  用于报告页的答案显示 */
     answer: PropTypes.any,
+    /**  需要显示的子题题号 */
     qNum: PropTypes.array,
+    /**  外部累计InsertBlank数量 */
     externalInitAnswer: PropTypes.number,
+    /**  处理子题选中 */
     handleQuestionSelect: PropTypes.func,
+    /**  答案集合 */
     answerRsult: PropTypes.array,
+    /**  雅思填空题 && 拖拽题  用来定位 */
     materialIds: PropTypes.array,
+    /**  是否是报告页 */
     isReport: PropTypes.bool,
+    /**  外部传进来的段落样式 */
     paragraphClassName: PropTypes.object,
+    /** 专门用来设置段落间距 */
     pStyle: PropTypes.object,
+    /**  是否是雅思题库 */
     isIelts: PropTypes.bool,
+    /**  图片宽度 */
     imgWidth: PropTypes.number,
   };
 
@@ -64,7 +82,7 @@ class Block extends Component {
 
   // 更新
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    if (this.props.location && this.props.location.pathname !== prevProps.location.pathname) {
       if (this.anchor) {
         const anchorElement = ReactDOM.findDOMNode(this.anchor); // eslint-disable-line
         setTimeout(() => {
@@ -98,8 +116,8 @@ class Block extends Component {
         // 提取当前标记前的文字
         if (markup.index !== start) {
           if (p.text.substring(start, markup.index) !== '') {
-            const markupText = p.text.substring(start, markup.index);
-            spans.push(this.handleCenter(markupText));
+            const text = p.text.substring(start, markup.index);
+            spans.push(this.handleCenter(text));
           }
           start = markup.index;
         }
@@ -128,7 +146,7 @@ class Block extends Component {
             );
           }
 
-          /* eslint-disable */
+          /* eslint-disable  */
           if (get(answer, '0') === cntAnswer) {
             spans.push(<span key={`${start}-head`}>&nbsp;</span>);
             spans.push(
@@ -150,7 +168,7 @@ class Block extends Component {
               />,
             );
           }
-          /* eslint-enable */
+          /* eslint-enable  */
 
           if (markup.value === 'left') {
             spans.push(
@@ -282,11 +300,6 @@ class Block extends Component {
       }
       return <p className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)}>{spans} </p>;
     }
-    // 行内样式中如果插入空格，回车的处理情况
-    // const regex = /^(\s)*$/g;
-    // if (regex.test(p.text)) {
-    //   return false;
-    // }
     return <p className={this.props.pStyle ? css(this.props.pStyle) : css(styles.block)}>{p.text}</p>;
   }
 
@@ -356,15 +369,7 @@ class Block extends Component {
         ]}
         {...props}
       >
-        {/* {
-          find(p.markups, markup => markup.type === 'Arrow') &&
-          <span
-            className={css(styles.blockArrowBlank)}
-          />
-        } */}
-
         {this.renderInline()}
-
         { p.markups && p.markups.length > 0 &&
           this.renderOrigin()
         }

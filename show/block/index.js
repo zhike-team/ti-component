@@ -112,7 +112,6 @@ export default class Block extends Component {
       let cntAnswer = initAnswer;
       while (inlineMarkups.length) {
         const markup = inlineMarkups.shift();
-        console.log('markup:', markup);
         // 提取当前标记前的文字
         if (markup.index !== start) {
           if (p.text.substring(start, markup.index) !== '') {
@@ -374,24 +373,10 @@ export default class Block extends Component {
         ]}
         {...props}
       >
-        {/* {
-          find(p.markups, markup => markup.type === 'Arrow') &&
-          <span
-            className={css(styles.blockArrowBlank)}
-          />
-        } */}
-
         {this.renderInline()}
-
         { p.markups && p.markups.length > 0 &&
           this.renderOrigin()
         }
-
-        {/* {
-          isPositionTip &&
-          !!this.renderInline() &&
-          <img src={imgArrow} alt="arrow" className={css(styles.arrow)} />
-        } */}
       </View>
     );
   }

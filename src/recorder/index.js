@@ -59,7 +59,6 @@ export default class Recorder extends Component {
       await this.recorder.startRecording()
       .then(() => callback())
       .catch(error => {
-        console.log('getTracks:', stream.getTracks());
         this.onError({ mode, skip, key: 1 });
         console.error('startRecording failure', error)
       })

@@ -115,7 +115,6 @@ export default class ModalCorrect extends Component {
         // qualityArgument表示导出的图片质量，只有导出为jpeg和webp格式的时候此参数才有效，默认值是0.92
         compressedUrl = canvas.toDataURL('image/jpeg', 0.92);
       }
-      // console.log(file.size, image.src.length, compressedUrl.length)
 
       this.setState(prev => ({
         files: prev.files.concat([file]),

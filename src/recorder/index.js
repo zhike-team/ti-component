@@ -66,6 +66,7 @@ export default class Recorder extends Component {
     })
     .catch(err =>{
       console.log(err.name + ": " + err.message);
+      this.onError({ mode, skip });
     });
   }
 
